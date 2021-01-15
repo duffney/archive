@@ -1,0 +1,1 @@
+WScript.echo "Hello Word!"
