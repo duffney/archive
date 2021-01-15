@@ -1,0 +1,1 @@
+az appconfig kv import -n haloproto --label archetype -s file --path .\appconfigmock.json --format json --separator ':'

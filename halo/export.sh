@@ -1,0 +1,1 @@
+az appconfig kv list -n haloproto --key "arch*" >> archappconfig.json

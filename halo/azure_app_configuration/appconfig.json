@@ -1,0 +1,10 @@
+{
+  "halo": {
+    "prefix": "halo",
+    "region": "East US",
+    "tags": {
+      "owner": "Josh Duffney",
+      "version":"0.1"
+    }
+  }
+}

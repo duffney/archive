@@ -1,0 +1,9 @@
+client = "archetype"
+prefix = "arch"
+environment = "dev"
+addressPrefix = "10.90.14."
+configVersion = "v0.1"
+faultDomainCount = 2
+owner = "duffney"
+config = "tf-halo"
+location = "West US 2"

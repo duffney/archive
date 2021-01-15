@@ -1,0 +1,86 @@
+on: [push]
+
+name: Halo
+
+jobs:
+
+  update-build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Azure Login
+      uses: azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        enable-AzPSSession: true
+    
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Update App Config
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.9.1
+        inlineScript: |
+          az appconfig kv import -n haloproto --label archetype -s file --path $GITHUB_WORKSPACE/appConfig.json --format json --separator ':' -y
+    
+    - name: Export App Config Values
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.9.1
+        inlineScript: |
+          chmod +x $GITHUB_WORKSPACE/export.sh
+          $GITHUB_WORKSPACE/export.sh
+
+
+    - name: Run New-TerraformJsonConfig
+      uses: azure/powershell@v1
+      with:
+        inlineScript: |
+          .\New-TerraformJsonConfig.ps1
+        azPSVersion: '4.4.0'
+
+    # - name: Run Azure PowerShell script
+    #   uses: azure/powershell@v1
+    #   with:
+    #     inlineScript: |
+    #       $configData = (Get-Content archappconfig.json | ConvertFrom-Json) | Select-Object key,value
+    #       $locals = [PSCustomObject]@{}
+    #       foreach ($config in $configData)
+    #       {
+    #         $localkey = "$(($config.key).Split(':')[-1])"
+    #         $locals | Add-Member -MemberType NoteProperty -Name $localkey -Value $config.value
+    #       }
+
+    #       $json = Get-Content main_template.json | ConvertFrom-Json
+
+    #       $json | Add-Member -Type NoteProperty -Name 'locals' -Value $locals
+
+    #       $json = $json | ConvertTo-Json -Depth 3
+
+    #       New-Item -Name main.tf.json -value $json
+    #     azPSVersion: '4.4.0'
+
+    - name: upload main.tf.json
+      uses: actions/upload-artifact@v2
+      with:
+        name: terraform-artifact
+        path: main.tf.json
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    - name: Terraform Init
+      run: terraform init
+  
+    - name: Terraform Format
+      run: terraform fmt -check
+  
+    - name: Terraform Plan
+      run: terraform plan
+  
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      run: terraform apply -auto-approve

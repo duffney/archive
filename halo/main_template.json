@@ -1,0 +1,31 @@
+{
+  "provider": {
+    "azurerm": {
+      "features" : {},
+      "version": "~> 2.20"
+    }
+  },
+  "terraform":{
+    "backend": {
+      "remote":{
+        "organization": "duffneyio",
+        "workspaces":{
+          "name":"halo"
+        }
+      }
+    }
+  },
+  "variable": {
+    "location": {
+      "default": "West US 2"
+    }
+  },
+  "resource": {
+    "azurerm_resource_group": {
+      "main": {
+        "name": "${local.prefix}-resources",
+        "location": "${local.location}"
+      }
+    }
+  }
+}
