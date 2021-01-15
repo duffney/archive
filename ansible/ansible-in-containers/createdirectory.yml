@@ -1,0 +1,10 @@
+---
+  - hosts: localhost
+    gather_facts: false
+    connection: local
+
+    tasks:
+      - name: create ansible directory
+        file:
+          path: /ansible
+          state: directory
