@@ -1,0 +1,5 @@
+---
+- src: https://github.com/Duffney/chocolatey.git
+  scm: git
+  version: "v1.0"
+  name: chocolatey

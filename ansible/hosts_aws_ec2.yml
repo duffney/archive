@@ -1,0 +1,8 @@
+plugin: aws_ec2
+regions:
+  - us-east-1
+flters:
+  tag:app: ansible
+keyed_groups:
+  - key: tags.os
+    separator: ""
