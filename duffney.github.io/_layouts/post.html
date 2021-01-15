@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="{{ page.date | date: "%-d %b %Y" }}" class="post-meta__date date">Posted {{ page.date | date: "%-d %b %Y" }}.{% if page.modified %} Last updated {{ page.modified | date: "%-d %b %Y" }}.{% endif %}{% if page.psversion %} PS Version at posting {{ page.psversion }}.{% endif %}</time>
+    </div>
+    <h1 class="post-title">{{ page.title }}</h1>
+  </header>
+
+  <section class="post">
+    {{ content }}
+  </section>
+</article>
+
+{% if page.comments %}
+  {% include disqus.html %}
+{% endif %}

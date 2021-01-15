@@ -1,0 +1,40 @@
+# Site settings
+title: duffney.io
+description: 'DevOps Engineer | Pluralsight Author | Speaker | Blogger | PowerShell Advocate'
+url: 'http://duffney.io'
+#enforce_ssl: duffney.io
+baseurl: ''
+google_analytics: 'UA-41356215-3'
+disqus_shortname: duffney
+
+author:
+  name: 'Josh Duffney'
+  twitter_username: joshduffney
+  github_username:  duffney
+  linkedin_username:  joshduffney
+
+pages_list:
+  About: '/about/'
+  Archives: '/archives/'
+  
+
+# Build settings
+destination: _site
+paginate: 5
+permalink: /:title
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  # use Github Flavored Markdown
+  input: GFM
+  # do not replace newlines by <br>s
+  hard_wrap: false
+
+plugins:
+  - jemoji
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-seo-tag
+
+exclude: ['README.md', 'Gemfile', 'Gemfile.lock', 'screenshot.png']

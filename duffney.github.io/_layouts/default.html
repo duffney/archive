@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  </head>
+  {% include head.html %}
+  {% seo %}
+  </head>
+
+  <body>
+    {% include header.html %}
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        {{ content }}
+      </div>
+
+      {% include footer.html %}
+    </div>
+  </body>
+</html>
