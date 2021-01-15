@@ -1,0 +1,31 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-219",
+  "RelatedDocumentIds": [
+    "Users-1",
+    "teams-everyone"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Modified",
+  "UserId": "users-system",
+  "Username": "system",
+  "Occurred": "2018-01-14T12:41:43.8819453+00:00",
+  "Message": "User admin was added to the team Everyone",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Users-1",
+      "StartIndex": 5,
+      "Length": 5
+    },
+    {
+      "ReferencedDocumentId": "teams-everyone",
+      "StartIndex": 33,
+      "Length": 8
+    }
+  ],
+  "Comments": null,
+  "Details": null,
+  "IdentityEstablishedWith": "Unknown"
+}

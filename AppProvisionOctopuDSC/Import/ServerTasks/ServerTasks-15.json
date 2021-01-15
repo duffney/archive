@@ -1,0 +1,44 @@
+{
+  "$type": "Octopus.Core.Model.ServerTasks.ServerTask, Octopus.Core",
+  "Id": "ServerTasks-15",
+  "Name": "AdHocScript",
+  "Arguments": {
+    "EnvironmentIds": [],
+    "MachineIds": [
+      null
+    ],
+    "TargetRoles": [],
+    "ScriptBody": "Get-Module Invokedsc -list",
+    "Syntax": "PowerShell"
+  },
+  "Description": "Script run from management console",
+  "QueueTime": "2018-01-14T13:14:06.5397448+00:00",
+  "QueueTimeExpiry": "10675199.02:48:05.4775807",
+  "ExecutionTimeExpiry": "00:00:00",
+  "StartTime": "2018-01-14T13:14:06.5662105+00:00",
+  "LastUpdatedTime": "2018-01-14T13:14:17.3864247+00:00",
+  "CompletedTime": "2018-01-14T13:14:17.3864247+00:00",
+  "ErrorMessage": "",
+  "ConcurrencyTag": "AdHocScript",
+  "State": "Success",
+  "HasPendingInterruptions": false,
+  "HasWarningsOrErrors": false,
+  "ServerVersion": "4.1.4+Branch.master.Sha.8582c6610adebd0404ec12b1e2ec662d1dfa4cee",
+  "ServerNodeId": "OctopusServerNodes-3069ABB66B34",
+  "LogDifferentiationToken": "L9J5BNDM4S",
+  "AdditionalDescription": null,
+  "DurationSeconds": 11,
+  "ChildTaskCount": 0,
+  "QueueTimeExpiryDateTimeOffset": "9999-12-31T23:59:59.9999999+00:00",
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "ExtendedViewLogPermissions": [
+    "AdministerSystem"
+  ],
+  "ExtendedCreatePermissions": [
+    "AdministerSystem"
+  ],
+  "CanRerun": true,
+  "Properties": {}
+}

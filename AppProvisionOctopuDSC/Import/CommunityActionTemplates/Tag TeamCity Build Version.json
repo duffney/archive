@@ -1,0 +1,86 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-229",
+  "Name": "Tag TeamCity Build Version",
+  "ExternalId": "aabf7d20-579f-4e6f-af5f-14e0d87b1258",
+  "Description": "Try to tag the TeamCity build version and dependencies\n(Requires Octopus version to match TeamCity version)",
+  "Version": 2,
+  "ActionType": "Octopus.Script",
+  "Author": "B0R1K",
+  "Website": "https://library.octopus.com/step-templates/aabf7d20-579f-4e6f-af5f-14e0d87b1258",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/teamcity-tag-build.json",
+  "Category": "Other",
+  "Properties": {
+    "Octopus.Action.Script.ScriptBody": "$buildNumber = $OctopusParameters['buildNumber']\n$buildTypeId = $OctopusParameters['buildTypeId']\n\n$tcUrl = $OctopusParameters['TeamCityUrl']\n$tcUser = $OctopusParameters['TeamCityUser']\n$tcPass = $OctopusParameters['TeamCityPassword']\n$tcTags = $OctopusParameters['TeamCityTags']\n\n$credentials = [System.Text.Encoding]::UTF8.GetBytes(\"$($tcUser):$($tcPass)\")\n$headers = @{ \"Authorization\" = \"Basic $([System.Convert]::ToBase64String($credentials))\" }\n\n[string]$tagUri = $tcUrl + (\"/app/rest/builds/buildType:{0},number:{1}/tags/\" -f $buildTypeId,$buildNumber)\n\nWrite-Output \"Tagging Build with ID $($id)\"\n\ntry {\n    Invoke-RestMethod -Headers $headers -DisableKeepAlive -Method POST -Uri $tagUri -Body $tcTags -ContentType \"text/plain\"\n    Write-Output \"Build ID $($id) tagged successfully\"\n} catch {\n    Write-Output \"Build ID $($id) not tagged: $($_.Exception.Message)\"\n}\n\n",
+    "Octopus.Action.Script.Syntax": "PowerShell",
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.RunOnServer": "false",
+    "Octopus.Action.Script.ScriptFileName": "",
+    "Octopus.Action.Package.FeedId": "",
+    "Octopus.Action.Package.PackageId": ""
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "buildNumber",
+      "Label": "Build Number",
+      "HelpText": null,
+      "DefaultValue": "#{Octopus.Release.Number}",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "buildTypeId",
+      "Label": "Build Configuration ID",
+      "HelpText": "The build configuration id to look for the build to pin.\n\nGeneral Settings of the Build Configuration",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "TeamCityUrl",
+      "Label": "Url of TeamCity Server",
+      "HelpText": "The url to the TeamCity server.",
+      "DefaultValue": "http://localhost:88",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "TeamCityUser",
+      "Label": "TeamCity User",
+      "HelpText": "The TeamCity user used for pinning the build",
+      "DefaultValue": "teamcity",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "TeamCityPassword",
+      "Label": "TeamCity User Password",
+      "HelpText": "The password for the TeamCity user.",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "Sensitive"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "TeamCityTags",
+      "Label": "TeamCity Tags",
+      "HelpText": "Tags to add to the TeamCity Build, space separated list of values.",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-292-2018032008440754",
+  "LogoAttachmentMimeType": "image/png"
+}

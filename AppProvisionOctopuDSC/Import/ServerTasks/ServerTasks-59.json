@@ -1,0 +1,44 @@
+{
+  "$type": "Octopus.Core.Model.ServerTasks.ServerTask, Octopus.Core",
+  "Id": "ServerTasks-59",
+  "Name": "Health",
+  "Arguments": {
+    "Timeout": "00:05:00",
+    "MachineIds": [
+      null
+    ],
+    "OnlyTestConnection": false
+  },
+  "Description": "Check WEB1 health",
+  "QueueTime": "2018-03-20T20:46:15.402428+00:00",
+  "QueueTimeExpiry": "10675199.02:48:05.4775807",
+  "ExecutionTimeExpiry": "00:00:00",
+  "StartTime": "2018-03-20T20:46:15.4641621+00:00",
+  "LastUpdatedTime": "2018-03-20T20:48:05.8578156+00:00",
+  "CompletedTime": "2018-03-20T20:48:05.8578156+00:00",
+  "ErrorMessage": "The health check failed. One or more deployment targets were not available.",
+  "ConcurrencyTag": "Health",
+  "State": "Failed",
+  "HasPendingInterruptions": false,
+  "HasWarningsOrErrors": true,
+  "ServerVersion": "4.1.7+Branch.master.Sha.7b44f87e1de69423865ff65a2eaed867a6773f18",
+  "ServerNodeId": "OctopusServerNodes-8B2D72EC00C6",
+  "LogDifferentiationToken": "LQ85L46VSN",
+  "AdditionalDescription": null,
+  "DurationSeconds": 110,
+  "ChildTaskCount": 0,
+  "QueueTimeExpiryDateTimeOffset": "9999-12-31T23:59:59.9999999+00:00",
+  "ProjectId": null,
+  "EnvironmentId": "Environments-1",
+  "TenantId": null,
+  "ExtendedViewLogPermissions": [
+    "EnvironmentView",
+    "MachineView"
+  ],
+  "ExtendedCreatePermissions": [
+    "EnvironmentView",
+    "MachineEdit"
+  ],
+  "CanRerun": true,
+  "Properties": {}
+}

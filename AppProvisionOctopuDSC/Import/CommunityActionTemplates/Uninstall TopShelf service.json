@@ -1,0 +1,43 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-235",
+  "Name": "Uninstall TopShelf service",
+  "ExternalId": "b5a4ed5a-7fb3-4d0c-b4a5-02616d0ed919",
+  "Description": "This step can be used before unpacking a package with your TopShelf service to stop and remove the previous installation, if there is one.",
+  "Version": 4,
+  "ActionType": "Octopus.Script",
+  "Author": "sphinxy",
+  "Website": "https://library.octopus.com/step-templates/b5a4ed5a-7fb3-4d0c-b4a5-02616d0ed919",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/topshelf-uninstall.json",
+  "Category": "Topshelf",
+  "Properties": {
+    "Octopus.Action.Script.Syntax": "PowerShell",
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.RunOnServer": "false",
+    "Octopus.Action.Script.ScriptBody": "$step = $OctopusParameters['Unpackage step']\n$previous = $OctopusParameters[\"Octopus.Action[$step].Package.CustomInstallationDirectory\"]\n$customExeFilename = $OctopusParameters['Exe filename'];\n\nif(!$previous -or (-not (Test-Path $previous)) )\n{\n    Write-Host \"No installation found in: $previous\"\n\t\n    $previous = $OctopusParameters[\"Octopus.Action[$step].Output.Package.InstallationDirectoryPath\"]\n    if(!$previous -or (-not (Test-Path $previous)) )\n    {\n        Write-Host \"No installation found in: $previous\"\n        Break\n    }\n}\n\n\n$defaultExeFilename = $OctopusParameters[\"Octopus.Action[$step].Package.NuGetPackageId\"] + \".exe\"\n$exeFilename = If ($customExeFilename) {$customExeFilename} Else {$defaultExeFilename}\n$path = Join-Path $previous $exeFilename\n\nWrite-Host \"Previous installation: $path\"\n\nStart-Process $path -ArgumentList \"stop\" -NoNewWindow -Wait | Write-Host\nStart-Process $path -ArgumentList \"uninstall\" -NoNewWindow -Wait | Write-Host\n"
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "Unpackage step",
+      "Label": "",
+      "HelpText": "The step where you unpack the topshelf service",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "StepName"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "Exe filename",
+      "Label": "",
+      "HelpText": "Name of exe file for service, if empty, package Id+\".exe.\" will be used as default",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-223-2018011412241618",
+  "LogoAttachmentMimeType": "image/png"
+}

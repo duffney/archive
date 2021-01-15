@@ -1,0 +1,8 @@
+{
+  "$type": "Octopus.Migrator.ExportProcess.ScriptMetadata, Octopus.Migrator",
+  "Id": "webApp",
+  "ProjectName": "webApp",
+  "StepName": "Deploy Web Application",
+  "ActionName": "Deploy Web Application",
+  "ScriptName": "Script.ps1"
+}

@@ -1,0 +1,25 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-223",
+  "RelatedDocumentIds": [
+    "Environments-1"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": "Environments-1",
+  "TenantId": null,
+  "Category": "Created",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T12:25:37.4847137+00:00",
+  "Message": "Environment Development was created",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Environments-1",
+      "StartIndex": 12,
+      "Length": 11
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"Environments-1\",\r&para;<br>  \"Name\": \"Development\",\r&para;<br>  \"Description\": \"\",\r&para;<br>  \"SortOrder\": 0,\r&para;<br>  \"UseGuidedFailure\": false\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

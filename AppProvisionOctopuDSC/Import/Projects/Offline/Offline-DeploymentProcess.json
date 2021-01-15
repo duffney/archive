@@ -1,0 +1,183 @@
+{
+  "$type": "Octopus.Core.Model.Projects.DeploymentProcess, Octopus.Core",
+  "Id": "deploymentprocess-Projects-21",
+  "OwnerId": "Projects-21",
+  "Version": 11,
+  "Steps": [
+    {
+      "Id": "fa50425c-4234-49a2-bf24-c288dc16146a",
+      "Name": "Deploy Pester",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "e8024339-fb69-4dde-93a8-d37dacf439f7",
+          "Name": "Deploy Pester",
+          "ActionType": "Octopus.TentaclePackage",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.EnabledFeatures": "Octopus.Features.CustomDirectory",
+            "Octopus.Action.Package.DownloadOnTentacle": "False",
+            "Octopus.Action.Package.FeedId": "feeds-builtin",
+            "Octopus.Action.Package.PackageId": "Pester",
+            "Octopus.Action.Package.CustomInstallationDirectory": "C:\\Program Files\\WindowsPowerShell\\Modules\\Pester\\#{Octopus.Action.Package.NuGetPackageVersion}"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "3017d146-b8e8-4634-9c9f-8d1fe4148260",
+      "Name": "Deploy PackageManagement",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "f2162c04-5f3b-4d23-8b30-47c2e8ddfc01",
+          "Name": "Deploy PackageManagement",
+          "ActionType": "Octopus.TentaclePackage",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.EnabledFeatures": "Octopus.Features.CustomDirectory",
+            "Octopus.Action.Package.DownloadOnTentacle": "False",
+            "Octopus.Action.Package.FeedId": "feeds-builtin",
+            "Octopus.Action.Package.PackageId": "PackageManagement",
+            "Octopus.Action.Package.CustomInstallationDirectory": "C:\\Program Files\\WindowsPowerShell\\Modules\\PackageManagement\\#{Octopus.Action.Package.NuGetPackageVersion}"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "07687dbc-4e97-4cfc-8d67-d3a94d41157f",
+      "Name": "Deploy InvokeDSC",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "104c018a-112c-4007-a3ce-80a14c9e3e55",
+          "Name": "Deploy InvokeDSC",
+          "ActionType": "Octopus.TentaclePackage",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.EnabledFeatures": "Octopus.Features.CustomDirectory",
+            "Octopus.Action.Package.DownloadOnTentacle": "False",
+            "Octopus.Action.Package.FeedId": "feeds-builtin",
+            "Octopus.Action.Package.PackageId": "InvokeDSC",
+            "Octopus.Action.Package.CustomInstallationDirectory": "C:\\Program Files\\WindowsPowerShell\\Modules\\InvokeDSC\\#{Octopus.Action.Package.NuGetPackageVersion}"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "6027a0d9-2333-4d59-8016-60309f90d80c",
+      "Name": "Deploy cNtfsAccessControl",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "9f9b9ab7-2bd5-4c45-a054-a9480bd1f178",
+          "Name": "Deploy cNtfsAccessControl",
+          "ActionType": "Octopus.TentaclePackage",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.EnabledFeatures": "Octopus.Features.CustomDirectory",
+            "Octopus.Action.Package.DownloadOnTentacle": "False",
+            "Octopus.Action.Package.FeedId": "feeds-builtin",
+            "Octopus.Action.Package.PackageId": "cNtfsAccessControl",
+            "Octopus.Action.Package.CustomInstallationDirectory": "C:\\Program Files\\WindowsPowerShell\\Modules\\cNtfsAccessControl\\#{Octopus.Action.Package.NuGetPackageVersion}"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "a7da184b-3504-47d4-8e2b-cfe1c98ab45c",
+      "Name": "Deploy cchoco",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "d91a4fa3-bbdd-4385-8745-73652e74fa39",
+          "Name": "Deploy cchoco",
+          "ActionType": "Octopus.TentaclePackage",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.EnabledFeatures": "Octopus.Features.CustomDirectory",
+            "Octopus.Action.Package.DownloadOnTentacle": "False",
+            "Octopus.Action.Package.FeedId": "feeds-builtin",
+            "Octopus.Action.Package.PackageId": "cchoco",
+            "Octopus.Action.Package.CustomInstallationDirectory": "C:\\Program Files\\WindowsPowerShell\\Modules\\cchoco\\#{Octopus.Action.Package.NuGetPackageVersion}"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "583e7e78-b766-4de5-b9cf-a22b3cba3329",
+      "Name": "Deploy xWebAdministration",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "2b8fe1c4-f2c2-438c-a429-9848da2be4c8",
+          "Name": "Deploy xWebAdministration",
+          "ActionType": "Octopus.TentaclePackage",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.EnabledFeatures": "Octopus.Features.CustomDirectory",
+            "Octopus.Action.Package.DownloadOnTentacle": "False",
+            "Octopus.Action.Package.FeedId": "feeds-builtin",
+            "Octopus.Action.Package.PackageId": "xWebAdministration",
+            "Octopus.Action.Package.CustomInstallationDirectory": "C:\\Program Files\\WindowsPowerShell\\Modules\\xWebAdministration\\#{Octopus.Action.Package.NuGetPackageVersion}"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    }
+  ],
+  "RelatedDocumentIds": []
+}

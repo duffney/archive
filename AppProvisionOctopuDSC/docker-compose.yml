@@ -1,0 +1,47 @@
+version: "2.1"
+services:
+  db:
+    image: microsoft/mssql-server-windows-express
+    environment:
+      sa_password: "P@ssw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433" # REMARK: This is currently required, needs investigation
+    healthcheck:
+      test: [ "CMD", "sqlcmd", "-U", "sa", "-P", "P@ssw0rd", "-Q", "select 1" ]
+      interval: 10s
+      retries: 10
+  octopus:
+    image: octopusdeploy/octopusdeploy:2018.3.6
+    environment:
+      OctopusAdminUsername: "admin"
+      OctopusAdminPassword: "P@ssw0rd"
+      sqlDbConnectionString: "Server=db,1433;Initial Catalog=Octopus;Persist Security Info=False;User ID=sa;Password=P@ssw0rd;MultipleActiveResultSets=False;Connection Timeout=30;"
+    ports:
+     - "81"
+    depends_on:
+      db:
+        condition: service_healthy
+    stdin_open: true #Process sits and waits for ReadLine
+    volumes:
+      - "./Import:C:/Import"
+      - "./Repository:C:/Repository"    
+  tentacle:
+    image: octopusdeploy/tentacle:3.19.0
+    hostname: web1
+    depends_on:
+      octopus:
+        condition: service_healthy
+    environment:
+      ServerUsername: "admin"
+      ServerPassword: "P@ssw0rd"
+      TargetEnvironment: "Development"
+      TargetRole: "web-server"
+      ServerUrl: "http://octopus:81"
+    stdin_open: true #Process sits and waits for ReadLine
+    volumes:
+      - "./Applications:C:/Applications"    
+networks:
+  default:
+    external:
+      name: nat

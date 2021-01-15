@@ -1,0 +1,26 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-101",
+  "RelatedDocumentIds": [
+    "deploymentprocess-Projects-3",
+    "Projects-3"
+  ],
+  "ProjectId": "Projects-3",
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Modified",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-15T17:00:34.9154771+00:00",
+  "Message": "Deployment process for webApp was changed",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Projects-3",
+      "StartIndex": 23,
+      "Length": 6
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"deploymentprocess-Projects-21\",\r&para;<br>  \"OwnerId\": \"Projects-21\",\r&para;<br>  \"Version\": </span><del style=\"background:#ffe6e6;\">1</del><ins style=\"background:#e6ffe6;\">2</ins><span>,\r&para;<br>  \"Steps\": [\r&para;<br>    {\r&para;<br>      \"Id\": \"c4c65385-87f6-4241-a36f-a4d48235a970\",\r&para;<br>      \"Name\": \"Deploy webApp\",\r&para;<br>      \"Condition\": \"Always\",\r&para;<br>      \"StartTrigger\": \"StartAfterPrevious\",\r&para;<br>      \"RequiresPackagesToBeAcquired\": false,\r&para;<br>      \"Actions\": [\r&para;<br>        {\r&para;<br>          \"Id\": \"b8a3376f-99fa-4336-8bb9-e44900eda294\",\r&para;<br>          \"Name\": \"Deploy webApp\",\r&para;<br>          \"ActionType\": \"Octopus.TentaclePackage\",\r&para;<br>          \"IsDisabled\": false,\r&para;<br>          \"Environments\": [],\r&para;<br>          \"ExcludedEnvironments\": [],\r&para;<br>          \"Channels\": [],\r&para;<br>          \"TenantTags\": [],\r&para;<br>          \"Properties\": {\r&para;<br>            \"Octopus.Action.</span><del style=\"background:#ffe6e6;\">Package.AutomaticallyRunConfigurationTransformationFiles\": \"True\",\r&para;<br>            \"Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings\": \"True\",\r&para;<br>            \"Octopus.Action.EnabledFeatures\": \"Octopus.Features.ConfigurationTransforms,Octopus.Features.</del><ins style=\"background:#e6ffe6;\">EnabledFeatures\": \"Octopus.Features.Json</ins><span>ConfigurationVariables\",\r&para;<br>            \"Octopus.Action.Package.DownloadOnTentacle\": \"False\",\r&para;<br>            \"Octopus.Action.Package.FeedId\": \"feeds-builtin\",\r&para;<br>            \"Octopus.Action.Package.PackageId\": \"webApp\"</span><ins style=\"background:#e6ffe6;\">,\r&para;<br>            \"Octopus.Action.Package.JsonConfigurationVariablesEnabled\": \"True\"</ins><span>\r&para;<br>          }\r&para;<br>        }\r&para;<br>      ],\r&para;<br>      \"Properties\": {\r&para;<br>        \"Octopus.Action.TargetRoles\": \"web-server\"\r&para;<br>      }\r&para;<br>    }\r&para;<br>  ],\r&para;<br>  \"RelatedDocumentIds\": []\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

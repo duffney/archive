@@ -1,0 +1,17 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-1",
+  "RelatedDocumentIds": [],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Modified",
+  "UserId": "User Manager\\ContainerAdministrator",
+  "Username": "ContainerAdministrator",
+  "Occurred": "2018-04-05T18:13:33.3083952+00:00",
+  "Message": "UsernamePassword Configuration was changed.",
+  "MessageReferences": [],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"authentication-usernamepassword\",\r&para;<br>  \"Name\": \"UsernamePassword\",\r&para;<br>  \"ExtensionAuthor\": \"Octopus Deploy\",\r&para;<br>  \"ConfigurationSchemaVersion\": \"1.0\",\r&para;<br>  \"IsEnabled\": </span><del style=\"background:#ffe6e6;\">fals</del><ins style=\"background:#e6ffe6;\">tru</ins><span>e\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Command line"
+}

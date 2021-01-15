@@ -1,0 +1,25 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-221",
+  "RelatedDocumentIds": [
+    "Projects-2"
+  ],
+  "ProjectId": "Projects-2",
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Modified",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T12:37:12.9541666+00:00",
+  "Message": "Project InvokeDsc was modified",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Projects-2",
+      "StartIndex": 8,
+      "Length": 9
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"Projects-1\",\r&para;<br>  \"Name\": \"InvokeDsc\",\r&para;<br>  \"Description\": \"\",\r&para;<br>  \"Slug\": \"invokedsc\",\r&para;<br>  \"IsDisabled\": false,\r&para;<br>  \"VariableSetId\": \"variableset-Projects-1\",\r&para;<br>  \"DeploymentProcessId\": \"deploymentprocess-Projects-1\",\r&para;<br>  \"ProjectGroupId\": \"ProjectGroups-1\",\r&para;<br>  \"LifecycleId\": \"Lifecycles-1\",\r&para;<br>  \"AutoCreateRelease\": false,\r&para;<br>  \"DiscreteChannelRelease\": false,\r&para;<br>  \"IncludedLibraryVariableSetIds\": [],\r&para;<br>  \"UsedPackages\": [],\r&para;<br>  \"DefaultToSkipIfAlreadyInstalled\": false,\r&para;<br>  \"TenantedDeploymentMode\": \"Untenanted\",\r&para;<br>  \"VersioningStrategy\": {\r&para;<br>    \"DonorPackageStepId\": </span><del style=\"background:#ffe6e6;\">null,\r&para;<br>    \"Template\": \"#{Octopus.Version.LastMajor}.#{Octopus.Version.LastMinor}.#{Octopus.Version.NextPatch}\"</del><ins style=\"background:#e6ffe6;\">\"5b15e075-03b3-432c-8164-e07b9bc3df38\",\r&para;<br>    \"Template\": null</ins><span>\r&para;<br>  },\r&para;<br>  \"DefaultGuidedFailureMode\": \"EnvironmentDefault\",\r&para;<br>  \"Templates\": [],\r&para;<br>  \"ReleaseCreationStrategy\": {\r&para;<br>    \"ReleaseCreationPackageStepId\": </span><del style=\"background:#ffe6e6;\">null</del><ins style=\"background:#e6ffe6;\">\"\"</ins><span>,\r&para;<br>    \"ChannelId\": null\r&para;<br>  },\r&para;<br>  \"ProjectConnectivityPolicy\": {\r&para;<br>    \"SkipMachineBehavior\": \"None\",\r&para;<br>    \"TargetRoles\": [],\r&para;<br>    \"AllowDeploymentsToNoTargets\": false\r&para;<br>  },\r&para;<br>  \"AutoDeployReleaseOverrides\": []\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

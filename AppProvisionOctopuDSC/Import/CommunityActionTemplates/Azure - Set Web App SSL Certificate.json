@@ -1,0 +1,93 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-281",
+  "Name": "Azure - Set Web App SSL Certificate",
+  "ExternalId": "72a32f48-2de9-4dac-9c47-b491413478e2",
+  "Description": "Configures the SSL binding for an Azure Web App to use an [Octopus-managed certificate](https://octopus.com/docs/deploying-applications/certificates)",
+  "Version": 1,
+  "ActionType": "Octopus.AzurePowerShell",
+  "Author": "MJRichardson",
+  "Website": "https://library.octopus.com/step-templates/72a32f48-2de9-4dac-9c47-b491413478e2",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/azure-web-app-ssl.json",
+  "Category": "Azure",
+  "Properties": {
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.Azure.AccountId": "#{SslAzureSubscription}",
+    "Octopus.Action.Script.ScriptBody": "<#\nTakes an Octopus certificate variable and\n    1) Writes it to a temporary file with a password (as Azure requires the PFX have a password)\n    2) Invokes New-AzureRmWebAppSSLBinding\n    3) Removes the temporary certificate file\n#>\n\n$ErrorActionPreference = 'Stop'\n\nWrite-Verbose \"Creating temporary certificate file\"\n$TempCertificateFile = New-TemporaryFile\n# The PFX upload to Azure must have a password. So we give it a GUID.\n$Password = [guid]::NewGuid().ToString(\"N\")\n\n$CertificateName = $OctopusParameters[\"SslCertificate.Name\"]\n\nWrite-Host \"Creating HTTPS binding on web app '$SslWebApp' for domain $SslDomainName using certificate '$CertificateName' \"\n\n$CertificateBytes = [Convert]::FromBase64String($OctopusParameters[\"SslCertificate.Pfx\"])\n[IO.File]::WriteAllBytes($TempCertificateFile.FullName, $CertificateBytes)\nGet-PfxData -FilePath $TempCertificateFile.FullName | Export-PfxCertificate -FilePath $TempCertificateFile.FullName -Password (ConvertTo-SecureString -String $Password -AsPlainText -Force)\n\n$BindingParams = @{\n    WebAppName = $SslWebApp\n    ResourceGroupName = $SslResourceGroup\n    Name = $SslDomainName\n    CertificateFilePath = $TempCertificateFile.FullName\n    CertificatePassword = $Password\n    SslState = $SslState\n}\n\nif ($SslSlot) { $BindingParams['Slot'] = $SslSlot }\n\nNew-AzureRmWebAppSSLBinding @BindingParams\n\nWrite-Verbose \"Removing temporary certificate file\"\nRemove-Item $TempCertificateFile.FullName -Force"
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "SslAzureSubscription",
+      "Label": "Azure Subscription",
+      "HelpText": null,
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "AzureAccount"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "SslWebApp",
+      "Label": "Azure Web App",
+      "HelpText": "The name of the Azure Web App for which the SSL binding will be created.",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "SslResourceGroup",
+      "Label": "Resource Group",
+      "HelpText": "The name of the Azure Resource Group containing the Web App",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "SslSlot",
+      "Label": "Slot",
+      "HelpText": "The Azure Deployment Slot (optional)",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "SslDomainName",
+      "Label": "Domain Name",
+      "HelpText": "The fully qualified domain name for the SSL binding. e.g. store.acme.com",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "SslCertificate",
+      "Label": "Certificate",
+      "HelpText": "The certificate to be used for the SSL binding",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "Certificate"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "SslState",
+      "Label": "SSL State",
+      "HelpText": "Specifies the SSL state of the certificate",
+      "DefaultValue": "SniEnabled",
+      "DisplaySettings": {
+        "Octopus.ControlType": "Select",
+        "Octopus.SelectOptions": "SniEnabled\nIpBasedEnabled\nDisabled"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-281-2018040506144674",
+  "LogoAttachmentMimeType": "image/png"
+}

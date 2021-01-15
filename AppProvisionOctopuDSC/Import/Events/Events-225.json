@@ -1,0 +1,25 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-225",
+  "RelatedDocumentIds": [
+    "feeds-psgallery"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Created",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T12:27:27.2207093+00:00",
+  "Message": "NuGetFeed PSGallery was created",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "feeds-psgallery",
+      "StartIndex": 10,
+      "Length": 9
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"DownloadAttempts\": 5,\r&para;<br>  \"DownloadRetryBackoffSeconds\": 10,\r&para;<br>  \"EnhancedMode\": false,\r&para;<br>  \"Id\": \"feeds-psgallery\",\r&para;<br>  \"Name\": \"PSGallery\",\r&para;<br>  \"FeedUri\": \"https://www.powershellgallery.com/api/v2/\",\r&para;<br>  \"Username\": null,\r&para;<br>  \"Password\": null,\r&para;<br>  \"FeedType\": \"NuGet\"\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

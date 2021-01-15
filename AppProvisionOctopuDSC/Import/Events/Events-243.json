@@ -1,0 +1,26 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-243",
+  "RelatedDocumentIds": [
+    "ServerTasks-60",
+    "Environments-1"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": "Environments-1",
+  "TenantId": null,
+  "Category": "Created",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-03-20T20:48:11.612201+00:00",
+  "Message": "Ran task Check WEB1 health",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "ServerTasks-60",
+      "StartIndex": 9,
+      "Length": 17
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"ServerTasks-68\",\r&para;<br>  \"Name\": \"Health\",\r&para;<br>  \"Arguments\": {\r&para;<br>    \"Timeout\": \"00:05:00\",\r&para;<br>    \"MachineIds\": [\r&para;<br>      \"Machines-1\"\r&para;<br>    ],\r&para;<br>    \"OnlyTestConnection\": false\r&para;<br>  },\r&para;<br>  \"Description\": \"Check WEB1 health\",\r&para;<br>  \"QueueTime\": \"2018-03-20T20:48:11.6090459+00:00\",\r&para;<br>  \"QueueTimeExpiry\": \"10675199.02:48:05.4775807\",\r&para;<br>  \"ExecutionTimeExpiry\": \"00:00:00\",\r&para;<br>  \"StartTime\": null,\r&para;<br>  \"LastUpdatedTime\": null,\r&para;<br>  \"CompletedTime\": null,\r&para;<br>  \"ErrorMessage\": \"\",\r&para;<br>  \"ConcurrencyTag\": \"Health\",\r&para;<br>  \"State\": \"Queued\",\r&para;<br>  \"HasPendingInterruptions\": false,\r&para;<br>  \"HasWarningsOrErrors\": false,\r&para;<br>  \"ServerVersion\": null,\r&para;<br>  \"ServerNodeId\": null,\r&para;<br>  \"LogDifferentiationToken\": \"D45254VHEW\",\r&para;<br>  \"AdditionalDescription\": null,\r&para;<br>  \"DurationSeconds\": 0,\r&para;<br>  \"QueueTimeExpiryDateTimeOffset\": \"9999-12-31T23:59:59.9999999+00:00\",\r&para;<br>  \"ProjectId\": \"projects-*\",\r&para;<br>  \"EnvironmentId\": \"Environments-1\",\r&para;<br>  \"TenantId\": \"tenants-*\",\r&para;<br>  \"ExtendedViewLogPermissions\": [\r&para;<br>    \"EnvironmentView\",\r&para;<br>    \"MachineView\"\r&para;<br>  ],\r&para;<br>  \"ExtendedCreatePermissions\": [\r&para;<br>    \"EnvironmentView\",\r&para;<br>    \"MachineEdit\"\r&para;<br>  ],\r&para;<br>  \"CanRerun\": true,\r&para;<br>  \"Properties\": {}\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

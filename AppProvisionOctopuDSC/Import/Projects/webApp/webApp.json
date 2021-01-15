@@ -1,0 +1,36 @@
+{
+  "$type": "Octopus.Core.Model.Projects.Project, Octopus.Core",
+  "Id": "Projects-3",
+  "Name": "webApp",
+  "Description": "",
+  "Slug": "webapp",
+  "IsDisabled": false,
+  "VariableSetId": "variableset-Projects-3",
+  "DeploymentProcessId": "deploymentprocess-Projects-3",
+  "ProjectGroupId": "ProjectGroups-1",
+  "LifecycleId": "Lifecycles-1",
+  "AutoCreateRelease": false,
+  "DiscreteChannelRelease": false,
+  "IncludedLibraryVariableSetIds": [],
+  "UsedPackages": [
+    "webApp"
+  ],
+  "DefaultToSkipIfAlreadyInstalled": false,
+  "TenantedDeploymentMode": "Untenanted",
+  "VersioningStrategy": {
+    "DonorPackageStepId": null,
+    "Template": "#{Octopus.Version.LastMajor}.#{Octopus.Version.LastMinor}.#{Octopus.Version.NextPatch}"
+  },
+  "DefaultGuidedFailureMode": "EnvironmentDefault",
+  "Templates": [],
+  "ReleaseCreationStrategy": {
+    "ReleaseCreationPackageStepId": null,
+    "ChannelId": null
+  },
+  "ProjectConnectivityPolicy": {
+    "SkipMachineBehavior": "None",
+    "TargetRoles": [],
+    "AllowDeploymentsToNoTargets": false
+  },
+  "AutoDeployReleaseOverrides": []
+}

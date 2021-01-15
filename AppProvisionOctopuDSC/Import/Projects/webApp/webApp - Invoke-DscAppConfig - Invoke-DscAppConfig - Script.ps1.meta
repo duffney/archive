@@ -1,0 +1,8 @@
+{
+  "$type": "Octopus.Migrator.ExportProcess.ScriptMetadata, Octopus.Migrator",
+  "Id": "webApp",
+  "ProjectName": "webApp",
+  "StepName": "Invoke-DscAppConfig",
+  "ActionName": "Invoke-DscAppConfig",
+  "ScriptName": "Script.ps1"
+}

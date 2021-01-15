@@ -1,0 +1,26 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-58",
+  "RelatedDocumentIds": [
+    "deploymentprocess-Projects-1",
+    "Projects-1"
+  ],
+  "ProjectId": "Projects-1",
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Modified",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T19:02:49.1214989+00:00",
+  "Message": "Deployment process for ansibleish was changed",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Projects-1",
+      "StartIndex": 23,
+      "Length": 10
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"deploymentprocess-Projects-21\",\r&para;<br>  \"OwnerId\": \"Projects-21\",\r&para;<br>  \"Version\": </span><del style=\"background:#ffe6e6;\">0,\r&para;<br>  \"Steps\": [</del><ins style=\"background:#e6ffe6;\">1,\r&para;<br>  \"Steps\": [\r&para;<br>    {\r&para;<br>      \"Id\": \"c236f34c-9ab9-4a5e-a62b-fd709c0aa8d6\",\r&para;<br>      \"Name\": \"Deploy ansibleish\",\r&para;<br>      \"Condition\": \"Always\",\r&para;<br>      \"StartTrigger\": \"StartAfterPrevious\",\r&para;<br>      \"RequiresPackagesToBeAcquired\": false,\r&para;<br>      \"Actions\": [\r&para;<br>        {\r&para;<br>          \"Id\": \"786bcd34-77f4-4265-8d7a-ded27369738c\",\r&para;<br>          \"Name\": \"Deploy ansibleish\",\r&para;<br>          \"ActionType\": \"Octopus.TentaclePackage\",\r&para;<br>          \"IsDisabled\": false,\r&para;<br>          \"Environments\": [],\r&para;<br>          \"ExcludedEnvironments\": [],\r&para;<br>          \"Channels\": [],\r&para;<br>          \"TenantTags\": [],\r&para;<br>          \"Properties\": {\r&para;<br>            \"Octopus.Action.Package.AutomaticallyRunConfigurationTransformationFiles\": \"True\",\r&para;<br>            \"Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings\": \"True\",\r&para;<br>            \"Octopus.Action.EnabledFeatures\": \"Octopus.Features.ConfigurationTransforms,Octopus.Features.ConfigurationVariables\",\r&para;<br>            \"Octopus.Action.Package.DownloadOnTentacle\": \"False\",\r&para;<br>            \"Octopus.Action.Package.FeedId\": \"feeds-builtin\",\r&para;<br>            \"Octopus.Action.Package.PackageId\": \"ansibleish\"\r&para;<br>          }\r&para;<br>        }\r&para;<br>      ],\r&para;<br>      \"Properties\": {\r&para;<br>        \"Octopus.Action.TargetRoles\": \"web-server\"\r&para;<br>      }\r&para;<br>    }\r&para;<br>  </ins><span>],\r&para;<br>  \"RelatedDocumentIds\": []\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

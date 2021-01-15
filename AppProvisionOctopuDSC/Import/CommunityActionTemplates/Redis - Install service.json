@@ -1,0 +1,66 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-180",
+  "Name": "Redis - Install service",
+  "ExternalId": "3cf1dadf-169d-4fd2-b95b-f5f07343b911",
+  "Description": "Script will make sure that Redis server is installed as a Windows service\n\n- It will start Redis inside package directory\n- To provide custom config you can prepare your own package (e.g. my-redis-64) or improve this template",
+  "Version": 1,
+  "ActionType": "Octopus.Script",
+  "Author": "J-Sek",
+  "Website": "https://library.octopus.com/step-templates/3cf1dadf-169d-4fd2-b95b-f5f07343b911",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/redis-install.json",
+  "Category": "Redis",
+  "Properties": {
+    "Octopus.Action.Script.Syntax": "PowerShell",
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.RunOnServer": "false",
+    "Octopus.Action.Script.ScriptBody": "$step  = $OctopusParameters['ris_UnpackageStep']\n$force = $OctopusParameters['ris_ForceReinstall']\n$name  = $OctopusParameters['ris_ServiceName']\n$port  = $OctopusParameters['ris_Port']\n\n$outputPath = $OctopusParameters[\"Octopus.Action[$step].Package.CustomInstallationDirectory\"]\nif(!$outputPath) \n{\n    $outputPath = $OctopusParameters[\"Octopus.Action[$step].Output.Package.InstallationDirectoryPath\"]\n}\nif(!$outputPath) \n{\n    Throw \"Unable to find output path for step $step. Make sure you've selected the correct step for your package.\"\n}\n\n$path   = Join-Path $outputPath '\\tools\\redis-server.exe'\nif (-not (Test-Path $path) )\n{\n    Throw \"$path was not found\"\n}\n\n$service = Get-Service -Name $name -ErrorAction SilentlyContinue\nif ($service) {\n\n    if (-not $force) {\n        Write-Host \"Service already installed. Skipping this time.\"\n        return\n    }\n\n    Write-Host \">>> Uninstalling with: sc.exe\"\n    if ($service.Status -eq 'Running') {\n        &\"sc.exe\" stop $name | Write-Host\n    }\n    &\"sc.exe\" delete $name | Write-Host\n\n    $limit = 15\n    while (Get-Service -Name $name -ErrorAction SilentlyContinue) {\n        Start-Sleep -s 1\n        \n        $limit = $limit - 1\n        if ($limit -eq 0) {\n            Throw \"Unable to stop Redis service within 15s\"\n        }\n    }\n}\n\nWrite-Host \">>> Installing with: $path\"\n\nSet-Location $outputPath\n\n& $path --service-install --service-name $name --port $port | echo\n& $path --service-start   --service-name $name              | echo\n\nWrite-Host \">>> Verification: Expecting the service with 'Running' status\"\n\n$limit = 15\ndo {\n    Start-Sleep -s 1\n\n    $limit = $limit - 1\n    if ($limit -eq 0) {\n        Throw \"Redis service did not start within 15s\"\n    }\n\n    $service = Get-Service -Name $name -ErrorAction SilentlyContinue\n\n} until ($service -and $service.Status -eq 'Running')",
+    "Octopus.Action.Script.ScriptFileName": "",
+    "Octopus.Action.Package.FeedId": "",
+    "Octopus.Action.Package.PackageId": ""
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "ris_UnpackageStep",
+      "Label": "Unpackage step",
+      "HelpText": "The step where you unpack the topshelf service",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "StepName"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "ris_ServiceName",
+      "Label": "Service name",
+      "HelpText": null,
+      "DefaultValue": "Redis",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "ris_Port",
+      "Label": "Port",
+      "HelpText": null,
+      "DefaultValue": "6379",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "ris_ForceReinstall",
+      "Label": "Force reinstall",
+      "HelpText": "Service with the same name will be removed before installation",
+      "DefaultValue": "False",
+      "DisplaySettings": {
+        "Octopus.ControlType": "Checkbox"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-171-2018011412241573",
+  "LogoAttachmentMimeType": "image/png"
+}

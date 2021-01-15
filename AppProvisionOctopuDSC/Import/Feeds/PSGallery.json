@@ -1,0 +1,12 @@
+{
+  "$type": "Octopus.Core.Model.NuGet.NuGetFeed, Octopus.Core",
+  "DownloadAttempts": 5,
+  "DownloadRetryBackoffSeconds": 10,
+  "EnhancedMode": false,
+  "Id": "feeds-psgallery",
+  "Name": "PSGallery",
+  "FeedUri": "https://www.powershellgallery.com/api/v2/",
+  "Username": null,
+  "Password": null,
+  "FeedType": "NuGet"
+}

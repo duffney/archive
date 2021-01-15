@@ -1,0 +1,103 @@
+{
+  "$type": "Octopus.Core.Model.Projects.DeploymentProcess, Octopus.Core",
+  "Id": "deploymentprocess-Projects-3",
+  "OwnerId": "Projects-3",
+  "Version": 12,
+  "Steps": [
+    {
+      "Id": "c4c65385-87f6-4241-a36f-a4d48235a970",
+      "Name": "Deploy webApp",
+      "Condition": "Always",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "b8a3376f-99fa-4336-8bb9-e44900eda294",
+          "Name": "Deploy webApp",
+          "ActionType": "Octopus.TentaclePackage",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.EnabledFeatures": "Octopus.Features.JsonConfigurationVariables,Octopus.Features.SubstituteInFiles",
+            "Octopus.Action.Package.DownloadOnTentacle": "False",
+            "Octopus.Action.Package.FeedId": "feeds-builtin",
+            "Octopus.Action.Package.PackageId": "webApp",
+            "Octopus.Action.Package.JsonConfigurationVariablesEnabled": "True",
+            "Octopus.Action.SubstituteInFiles.Enabled": "True",
+            "Octopus.Action.Package.JsonConfigurationVariablesTargets": "webApp.IISConfig.json",
+            "Octopus.Action.SubstituteInFiles.TargetFiles": "webApp.IISConfig.json"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "6a542c25-6fff-4cc8-a0d0-70cd2ffa9af9",
+      "Name": "Invoke-DscAppConfig",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "5b885aa0-673b-4128-9984-c577eb99aa8b",
+          "Name": "Invoke-DscAppConfig",
+          "ActionType": "Octopus.Script",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.Script.ScriptSource": "Inline",
+            "Octopus.Action.Script.Syntax": "PowerShell",
+            "Octopus.Action.Script.ScriptBody": "try\n{\n\tImport-Module InvokeDSC -Force\n}\ncatch [System.IO.FileNotFoundException]\n{\n\tthrow 'InvokeDSC module not found'\n}\n\n$splat = @{\n    Path = $Path\n    Repository = $Repository\n}\n\nInvoke-DscConfiguration @splat",
+            "Octopus.Action.Template.Version": "2",
+            "Octopus.Action.Template.Id": "ActionTemplates-1",
+            "Octopus.Action.RunOnServer": "false",
+            "Repository": "PSGallery",
+            "Path": "#{Octopus.Action[Deploy webApp].Output.Package.InstallationDirectoryPath}\\webApp.IISConfig.json"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "db35d63a-34f9-4c4e-aaa4-ce6a5dbe37cc",
+      "Name": "Deploy Web Application",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "7c0911b7-04b1-4334-838b-26da0451d3f6",
+          "Name": "Deploy Web Application",
+          "ActionType": "Octopus.Script",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.RunOnServer": "false",
+            "Octopus.Action.Script.ScriptSource": "Inline",
+            "Octopus.Action.Script.Syntax": "PowerShell",
+            "Octopus.Action.Script.ScriptBody": "Write-Output 'Deploying Web App...'"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    }
+  ],
+  "RelatedDocumentIds": [
+    "ActionTemplates-1"
+  ]
+}

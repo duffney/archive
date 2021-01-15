@@ -1,0 +1,46 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-243",
+  "Name": "Wait for IIS connections to drop to 0 or time expires",
+  "ExternalId": "2e27acd9-5ab3-4580-b746-7d0a0de23fcc",
+  "Description": "Wait for IIS connections to drop to 0 or time expires",
+  "Version": 1,
+  "ActionType": "Octopus.Script",
+  "Author": "tbrasch",
+  "Website": "https://library.octopus.com/step-templates/2e27acd9-5ab3-4580-b746-7d0a0de23fcc",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/wait-for-iis-connections-to-drop-to-zero.json",
+  "Category": "IIS",
+  "Properties": {
+    "Octopus.Action.Script.Syntax": "PowerShell",
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.RunOnServer": "false",
+    "Octopus.Action.Script.ScriptBody": "Import-Module WebAdministration\n\n$websites = Get-ChildItem IIS:\\Sites\n$continue = $true\n\n#Verify sleepSeconds can be converted to integer.\n$sleepSecondsString = 4\n\nIf ($OctopusParameters['wfitdSleepSeconds'])\n{\n  $sleepSecondsString = $OctopusParameters['wfitdSleepSeconds']\n}\n\n[int]$sleepSeconds = 0\n[bool]$result = [int]::TryParse($sleepSecondsString, [ref]$sleepSeconds)\n\nIf ($result)\n{\n  Write-Host ('Sleep Seconds: ' + $sleepSeconds)\n}\nElse\n{\n  Throw \"Cannot convert Sleep Seconds: '\" + $sleepSecondsString + \"' to integer.\"\n}\n\n#Verify totalWaitMinutes can be converted to integer.\n$totalWaitMinutesString = 5\n\nIf ($OctopusParameters['wfitdTotalWaitMinutes'])\n{\n  $totalWaitMinutesString = $OctopusParameters['wfitdTotalWaitMinutes']\n}\n\n[int]$totalWaitMinutes = 0\n[bool]$result = [int]::TryParse($totalWaitMinutesString, [ref]$totalWaitMinutes)\n\nIf ($result)\n{\n  Write-Host ('Total Wait Minutes: ' + $totalWaitMinutes)\n}\nElse\n{\n  Throw \"Cannot convert Total Wait Minutes: '\" + $totalWaitMinutesString + \"' to integer.\"\n}\n\nWrite-Host '***********************************************'\n\n$stopWatch = [system.diagnostics.stopwatch]::StartNew()\nWhile ($continue)\n{\n  $connectionsExist = $false\n  \n  Foreach ($website in $websites)\n  {\n    $connections = (Get-Counter ('\\\\' + $env:COMPUTERNAME  + '\\web service(' + $website.name + ')\\Current Connections')).CounterSamples.CookedValue\n    Write-Host ($website.Name + ' - ' + $connections + ' connection(s).')\n    If ($connections -gt 0)\n    {\n      $connectionsExist = $true\n    }\n  }\n  \n  If ($connectionsExist)\n  {\n    Start-Sleep -Seconds $sleepSeconds\n    \n    If ($stopWatch.Elapsed.Minutes -ge $totalWaitMinutes)\n    {\n      $continue = $false\n    }\n  }\n  Else\n  {\n    $continue = $false\n  }\n  \n  Write-Host ('Elapsed seconds: ' + $stopWatch.Elapsed.TotalSeconds)\n  Write-Host '==============================================='\n}\n\n$stopWatch.Stop()\n",
+    "Octopus.Action.Script.ScriptFileName": "",
+    "Octopus.Action.Package.FeedId": "",
+    "Octopus.Action.Package.PackageId": ""
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "wfitdSleepSeconds",
+      "Label": "Sleep Seconds",
+      "HelpText": "Number of seconds to sleep between checking connection count.",
+      "DefaultValue": "4",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "wfitdTotalWaitMinutes",
+      "Label": "Total Wait Minutes",
+      "HelpText": "Maximum wait time in minutes before proceeding, even if connections have not dropped to 0.",
+      "DefaultValue": "5",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-232-2018011412241624",
+  "LogoAttachmentMimeType": "image/png"
+}

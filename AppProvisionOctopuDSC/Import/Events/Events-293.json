@@ -1,0 +1,26 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-293",
+  "RelatedDocumentIds": [
+    "variableset-Projects-3",
+    "Projects-3"
+  ],
+  "ProjectId": "Projects-3",
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Modified",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-16T17:34:21.5987599+00:00",
+  "Message": "Variables for webApp were changed",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Projects-3",
+      "StartIndex": 14,
+      "Length": 6
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"variableset-Projects-3\",\r&para;<br>  \"OwnerId\": \"Projects-3\",\r&para;<br>  \"Version\": </span><del style=\"background:#ffe6e6;\">1,\r&para;<br>  \"Variables\": [</del><ins style=\"background:#e6ffe6;\">2,\r&para;<br>  \"Variables\": [\r&para;<br>    {\r&para;<br>      \"Id\": \"8f79b053-a4c2-82f9-2c12-b4b02c26f8cc\",\r&para;<br>      \"Name\": \"DSCResourcesToExecute:appPool:idleTimeoutAction\",\r&para;<br>      \"Description\": null,\r&para;<br>      \"Type\": \"String\",\r&para;<br>      \"Value\": \"Terminate\"\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"Id\": \"f4c8ba52-35f9-ce83-68b0-417a0293520c\",\r&para;<br>      \"Name\": \"DSCResourcesToExecute:LogAccess:Principal\",\r&para;<br>      \"Description\": null,\r&para;<br>      \"Type\": \"String\",\r&para;<br>      \"Value\": \"IIS APPPOOL\\\\webApp\"\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"Id\": \"1b6fb6a2-0b2f-bca6-c5e8-fcb795f56663\",\r&para;<br>      \"Name\": \"DSCResourcesToExecute:webApp:WebAppPool\",\r&para;<br>      \"Description\": null,\r&para;<br>      \"Type\": \"String\",\r&para;<br>      \"Value\": \"webApp\"\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"Id\": \"7844483f-994f-0d20-e617-7e921b6aeee7\",\r&para;<br>      \"Name\": \"DSCResourcesToExecute:appPool:name\",\r&para;<br>      \"Description\": null,\r&para;<br>      \"Type\": \"String\",\r&para;<br>      \"Value\": \"webApp\"\r&para;<br>    },</ins><span>\r&para;<br>    {\r&para;<br>      \"Id\": \"3b835f31-7742-9a70-36ec-84802218f9ad\",\r&para;<br>      \"Name\": \"webAppLogsDestinationPath\",\r&para;<br>      \"Description\": null,\r&para;<br>      \"Type\": \"String\",\r&para;<br>      \"Value\": \"c:\\\\\\\\webApp\\\\\\\\logs\",\r&para;<br>      \"Scope\": {\r&para;<br>        \"Environment\": [\r&para;<br>          \"Environments-1\"\r&para;<br>        ]\r&para;<br>      }\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"Id\": \"83e473aa-ef44-958a-29e6-28c5f0b7526c\",\r&para;<br>      \"Name\": \"WebAppDestinationPath\",\r&para;<br>      \"Description\": null,\r&para;<br>      \"Type\": \"String\",\r&para;<br>      \"Value\": \"c:\\\\\\\\webApp\",\r&para;<br>      \"Scope\": {\r&para;<br>        \"Environment\": [\r&para;<br>          \"Environments-1\"\r&para;<br>        ]\r&para;<br>      }\r&para;<br>    }\r&para;<br>  ],\r&para;<br>  \"RelatedDocumentIds\": [\r&para;<br>    \"Environments-1\"\r&para;<br>  ]\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

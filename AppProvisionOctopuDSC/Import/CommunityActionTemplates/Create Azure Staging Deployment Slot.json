@@ -1,0 +1,75 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-51",
+  "Name": "Create Azure Staging Deployment Slot",
+  "ExternalId": "10f6021e-27bd-47c5-9f10-4a1599182d8a",
+  "Description": "This template will create an azure deployment slot. This step template should be placed before the \"Deploy an Azure App\" Octopus Deploy template and be used with its sister step \"Switch Azure RM Deployment Slot\"\n\nThis should be used for green-blue deployments, as referenced in this document: https://octopus.com/docs/deploying-applications/deploying-to-azure/deploying-a-package-to-an-azure-web-app/using-deployment-slots-with-azure-web-apps\n\nNB: This step will promote your web app service plan to standard if it is currently using free, shared or basic tier",
+  "Version": 2,
+  "ActionType": "Octopus.AzurePowerShell",
+  "Author": "MarkDordoy",
+  "Website": "https://library.octopus.com/step-templates/10f6021e-27bd-47c5-9f10-4a1599182d8a",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/azure-create-staging-deployment-slot.json",
+  "Category": "Azure",
+  "Properties": {
+    "Octopus.Action.Azure.AccountId": "#{AzureAccount}",
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.Script.ScriptBody": "###############################################\n# Create Azure RM Staging Deployment Slot\n###############################################\n##Step1: Get Variables\n$ResourceGroupName             = $OctopusParameters[\"ResourceGroupName\"] \n$AppName                       = $OctopusParameters[\"AppName\"] \n$stagingSlotName               = $OctopusParameters[\"SlotName\"]\n$AppServicePlanName            = $OctopusParameters[\"AppServicePlanName\"] \n###############################################\n###############################################\nFunction Add-DeploymentSlotFunctionaility\n{\n    [cmdletbinding()]\n    param\n    (   \n        [string]$ResourceGroupName,\n        [string]$AppName,\n        [string]$AppServicePlanName\n    )\n    try \n    {\n        write-output \"Will make sure the service plan can support deployment slots\"\n        $servicePlan = Get-AzureRmAppServicePlan -ResourceGroupName $ResourceGroupName -Name $AppServicePlanName\n    \n        if(($servicePlan.Sku.Tier.ToLower() -eq \"free\" ) -or ($servicePlan.Sku.Tier.ToLower() -eq \"shared\" ) -or ($servicePlan.Sku.Tier.ToLower() -eq \"basic\" ))\n        {\n            Write-Warning \"Service plan does not currently support deployment slots, will now scale to standard tier\"\n            $planUpdate = Set-AzureRmAppServicePlan -ResourceGroupName $ResourceGroupName -Name $AppServicePlanName -Tier \"Standard\"\n            Write-Output \"Plan updated\"\n            $planUpdate | Out-String | Write-Verbose\n            write-output \"Plan Tier now set to:\"\n            $planUpdate.Sku | Out-String | Write-Output\n        }\n        else \n        {\n            Write-Output \"Service plan already supports deployment slots\"    \n        }       \n    }\n    catch \n    {\n        throw \"Error adding Deployment Slot functionailty. $_\"    \n    }\n}\n\nFunction Invoke-RequiredVariablesCheck\n{\n    if([string]::IsNullOrEmpty($ResourceGroupName))\n    {\n        Write-Error \"ResourceGroupName variable is not set\"\n    }\n\n    if([string]::IsNullOrEmpty($AppName))\n    {\n        write-error \"AppName variable is not set\"\n    }\n\n    if([string]::IsNullOrEmpty($stagingSlotName))\n    {\n        write-error \"stagingSlotName variable is not set\"\n    }\n\n    if([string]::IsNullOrEmpty($AppServicePlanName))\n    {\n        write-error \"AppServicePlanName variable is not set\"\n    }\n    Write-Verbose \"Variables in use are:\"\n    write-verbose \"ResourceGroupName:$ResourceGroupName\"\n    write-verbose \"AppName:$AppName\"\n    write-verbose \"stagingSlotName:$stagingSlotName\"\n    write-verbose \"AppServicePlanName:$AppServicePlanName\"\n}\n\n$ErrorActionPreference = \"Stop\"\n\ntry \n{\n    Invoke-RequiredVariablesCheck\n    Add-DeploymentSlotFunctionaility -ResourceGroupName $ResourceGroupName -AppName $AppName -AppServicePlanName $AppServicePlanName\n    Write-output \"Preparing Deployment Staging slot\"\n    $deploymentSlot = Get-AzureRmWebAppSlot -ResourceGroupName $ResourceGroupName -Name $AppName -Slot $stagingSlotName -ErrorAction SilentlyContinue\n    if($deploymentSlot.Id -eq $null)\n    {\n        Write-output \"No current deployment slot created, will create one now\"\n        New-AzureRmWebAppSlot -ResourceGroupName $ResourceGroupName -Name $AppName -Slot $stagingSlotName\n    }\n    else \n    {   \n        Write-Verbose \"Current slot exists, will remove to speed up deployment\"\n        Remove-AzureRmWebAppSlot -ResourceGroupName $ResourceGroupName -Name $AppName -Slot $stagingSlotName -Force\n        Write-Verbose \"Slot removed\"\n        New-AzureRmWebAppSlot -ResourceGroupName $ResourceGroupName -Name $AppName -Slot $stagingSlotName   \n    }\n    Write-Output \"Deployment slot $stagingSlotName created\"\n}\ncatch \n{\n    Write-Error \"Error in Create Azure RM Staging Deployment Slot step. $_\"    \n}",
+    "Octopus.Action.Package.FeedId": "",
+    "Octopus.Action.Script.ScriptFileName": "",
+    "Octopus.Action.Package.PackageId": ""
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "ResourceGroupName",
+      "Label": "ResourceGroupName",
+      "HelpText": "Enter the name of the resource group you are deploying this Web App into",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "AppServicePlanName",
+      "Label": "AppServicePlanName",
+      "HelpText": "Enter the name of the app service plan",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "AppName",
+      "Label": "AppName",
+      "HelpText": "Enter the name of your web/api/etc app",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "AzureAccount",
+      "Label": "AzureAccount",
+      "HelpText": "Enter the SPN used to connect to Azure",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "SlotName",
+      "Label": "SlotName",
+      "HelpText": "Enter the name you wish to call your deployment slot",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-288-2018032008440753",
+  "LogoAttachmentMimeType": "image/png"
+}

@@ -1,0 +1,91 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-123",
+  "Name": "IIS Virtual Directory - Create",
+  "ExternalId": "2cfbcd72-cf43-43fd-8291-9bb564cc512c",
+  "Description": "Create an IIS virtual directory.",
+  "Version": 7,
+  "ActionType": "Octopus.Script",
+  "Author": "jaymickey",
+  "Website": "https://library.octopus.com/step-templates/2cfbcd72-cf43-43fd-8291-9bb564cc512c",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/iis-vdir-create.json",
+  "Category": "IIS",
+  "Properties": {
+    "Octopus.Action.Script.ScriptBody": "## --------------------------------------------------------------------------------------\n## Input\n## --------------------------------------------------------------------------------------\n\n$virtualPath = $OctopusParameters['VirtualPath'].TrimStart('/',' ').TrimEnd('/', ' ')\n$physicalPath = $OctopusParameters['PhysicalPath']\n$parentSite = $OctopusParameters['ParentSite']\n$application = $OctopusParameters['ApplicationName']\n$username = $OctopusParameters['Username']\n$password = $OctopusParameters['Password']\n$createPhysicalPath = $OctopusParameters['CreatePhysicalPath']\n\n## --------------------------------------------------------------------------------------\n## Helpers\n## --------------------------------------------------------------------------------------\n# Helper for validating input parameters\nfunction Confirm-Parameter([string]$parameterInput, [string[]]$validInput, $parameterName) {\n    Write-Host \"${parameterName}: $parameterInput\"\n    if (! $parameterInput) {\n        throw \"No value was set for $parameterName, and it cannot be empty\"\n    }\n\n    if ($validInput) {\n        if (! $validInput -contains $parameterInput) {\n            throw \"'$input' is not a valid input for '$parameterName'\"\n        }\n    }\n\n}\n\n# Helper to run a block with a retry if things go wrong\n$maxFailures = 5\n$sleepBetweenFailures = Get-Random -minimum 1 -maximum 4\nfunction Invoke-CommandWithRetry([ScriptBlock] $command) {\n    $attemptCount = 0\n    $operationIncomplete = $true\n\n    while ($operationIncomplete -and $attemptCount -lt $maxFailures) {\n        $attemptCount = ($attemptCount + 1)\n\n        if ($attemptCount -ge 2) {\n            Write-Output \"Waiting for $sleepBetweenFailures seconds before retrying...\"\n            Start-Sleep -s $sleepBetweenFailures\n            Write-Output \"Retrying...\"\n        }\n\n        try {\n            & $command\n\n            $operationIncomplete = $false\n        } catch [System.Exception] {\n            if ($attemptCount -lt ($maxFailures)) {\n                Write-Output (\"Attempt $attemptCount of $maxFailures failed: \" + $_.Exception.Message)\n\n            }\n            else {\n                throw \"Failed to execute command\"\n            }\n        }\n    }\n}\n\n## --------------------------------------------------------------------------------------\n## Configuration\n## --------------------------------------------------------------------------------------\nConfirm-Parameter $virtualPath -parameterName \"Virtual path\"\nConfirm-Parameter $physicalPath -parameterName \"Physical path\"\nConfirm-Parameter $parentSite -parameterName \"Parent site\"\n\nif (![string]::IsNullOrEmpty($application)) {\n    $application = $application.TrimStart('/',' ').TrimEnd('/',' ')\n}\n\nAdd-PSSnapin WebAdministration -ErrorAction SilentlyContinue\nImport-Module WebAdministration -ErrorAction SilentlyContinue\n\n\n## --------------------------------------------------------------------------------------\n## Run\n## --------------------------------------------------------------------------------------\n\nWrite-Host \"Getting web site $parentSite\"\n$site = Get-Website -name $parentSite\nif (!$site) {\n    throw \"The web site '$parentSite' does not exist. Please create the site first.\"\n}\n\n$virtualFullPath = $virtualPath\n\nif ($application) {\n    Write-Host \"Verifying existance of application $application\"\n    $app = Get-WebApplication -site $parentSite -name $application\n    if (!$app) {\n        throw \"The application '$parentSite' does not exist. Please create the application first.\"\n    } else {\n        $virtualFullPath = $application + '/' + $virtualPath\n    }\n}\n\n# If the physical path down not exist and $createPhysicalPath is true,\n# then attempt create it, otherwise throw an error.\nif (!(Test-Path $physicalPath)) {\n    if ($createPhysicalPath) {\n        try {\n            Write-Host \"Attempting to create physical path '$physicalPath'\"\n            New-Item -Type Directory -Path $physicalPath -Force\n        } catch {\n            throw \"Couldn't create physical path!\"\n        }\n    } else {\n        throw \"Physical path does not exist!\"\n    }\n}\n\n# This needs to be improved, especially given applicaltions can be nested.\nif ($application) {\n    $existing = Get-WebVirtualDirectory -site $parentSite -Application $application -Name $virtualPath\n} else {\n    $existing = Get-WebVirtualDirectory -site $parentSite -Name $virtualPath\n}\n\nInvoke-CommandWithRetry {\n\n    $virtualDirectoryPath = \"IIS:\\Sites\\$parentSite\\$virtualFullPath\"\n\n    if (!$existing) {\n        Write-Host \"Creating virtual directory '$virtualPath'\"\n\n        New-Item $virtualDirectoryPath -type VirtualDirectory -physicalPath $physicalPath\n\n        Write-Host \"Virtual directory created\"\n    }\n    else {\n        Write-Host \"The virtual directory '$virtualPath' already exists. Checking physical path.\"\n\n        $currentPath = (Get-ItemProperty $virtualDirectoryPath).physicalPath\n        Write-Host \"Physical path currently set to $currentPath\"\n\n        if ([string]::Compare($currentPath, $physicalPath, $True) -ne 0) {\n            Set-ItemProperty $virtualDirectoryPath -name physicalPath -value $physicalPath\n            Write-Host \"Physical path changed to $physicalPath\"\n        }\n    }\n\n    ## Set vdir pass-through credentails, if applicable\n    if (![string]::IsNullOrEmpty($username) -and ![string]::IsNullOrEmpty($password)) {\n        Write-Host \"Setting Pass-through credentials for username '$username'\"\n\n        Set-ItemProperty $virtualDirectoryPath -Name userName -Value $username\n        Set-ItemProperty $virtualDirectoryPath -Name password -Value $password\n\n        Write-Host \"Pass-through credentials set\"\n    }\n}\n",
+    "Octopus.Action.Script.Syntax": "PowerShell"
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "VirtualPath",
+      "Label": "Virtual path",
+      "HelpText": "The full path to the virtual directory you wish to create. Do not include the application (if any) the directory will be created under. The path, not including the virtual directory itself must already exist. Eg. If the virtual directory is to be created under `myapp/someFolder/myVdir` enter: `someFolder/myVdir`.",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "ApplicationName",
+      "Label": "Application",
+      "HelpText": "Name of the IIS application to create the virtual directory under (not required).",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "PhysicalPath",
+      "Label": "Physical path",
+      "HelpText": "Physical folder that the application will serve files from. Example: `C:\\MyApp`.",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "CreatePhysicalPath",
+      "Label": "Create Physical Path (If not exists)",
+      "HelpText": "Create the physical path if it does not exist.",
+      "DefaultValue": "False",
+      "DisplaySettings": {
+        "Octopus.ControlType": "Checkbox"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "ParentSite",
+      "Label": "Parent site",
+      "HelpText": "The name of the IIS web site to attach the application to. For example, to put the application under the default web site, enter:\n\n    Default Web Site",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "Username",
+      "Label": "Username",
+      "HelpText": "Pass-through authentication username",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "Password",
+      "Label": "Password",
+      "HelpText": "Pass-through authentication password",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "Sensitive"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-115-2018011412241510",
+  "LogoAttachmentMimeType": "image/png"
+}

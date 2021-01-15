@@ -1,0 +1,26 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-363",
+  "RelatedDocumentIds": [
+    "Machines-1",
+    "Environments-1"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": "Environments-1",
+  "TenantId": null,
+  "Category": "MachineDeleted",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-04-05T18:24:19.3314011+00:00",
+  "Message": "Machine WEB1 was deleted (domain-event)",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Machines-1",
+      "StartIndex": 8,
+      "Length": 4
+    }
+  ],
+  "Comments": null,
+  "Details": null,
+  "IdentityEstablishedWith": "Session cookie"
+}

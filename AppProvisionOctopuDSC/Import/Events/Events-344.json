@@ -1,0 +1,25 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-344",
+  "RelatedDocumentIds": [
+    "feeds-builtin"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Created",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-04-05T18:17:16.0219869+00:00",
+  "Message": "Package cchoco version 2.3.1 was pushed to the builtin feed",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "feeds-builtin",
+      "StartIndex": 47,
+      "Length": 7
+    }
+  ],
+  "Comments": null,
+  "Details": null,
+  "IdentityEstablishedWith": "Session cookie"
+}

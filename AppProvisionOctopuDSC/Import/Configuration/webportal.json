@@ -1,0 +1,15 @@
+{
+  "$type": "Octopus.Core.WebPortal.WebPortalConfiguration, Octopus.Core",
+  "Id": "webportal",
+  "ConfigurationSchemaVersion": "1.0",
+  "Security": {
+    "CorsWhitelist": null,
+    "ReferrerPolicy": "no-referrer",
+    "ContentSecurityPolicyEnabled": true,
+    "HttpStrictTransportSecurityMaxAge": 31556926,
+    "HttpStrictTransportSecurityEnabled": false,
+    "XOptions": {
+      "XFrameOptionAllowFrom": null
+    }
+  }
+}

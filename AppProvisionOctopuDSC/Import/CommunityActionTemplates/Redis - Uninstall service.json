@@ -1,0 +1,36 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-181",
+  "Name": "Redis - Uninstall service",
+  "ExternalId": "959fbb4a-8e2e-4e21-bc55-863837b3cbed",
+  "Description": "This step can be used before unpacking a package with Redis service to stop and remove the previous installation, if there is one.",
+  "Version": 1,
+  "ActionType": "Octopus.Script",
+  "Author": "J-Sek",
+  "Website": "https://library.octopus.com/step-templates/959fbb4a-8e2e-4e21-bc55-863837b3cbed",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/redis-uninstall.json",
+  "Category": "Redis",
+  "Properties": {
+    "Octopus.Action.Script.Syntax": "PowerShell",
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.RunOnServer": "false",
+    "Octopus.Action.Script.ScriptBody": "$name = $OctopusParameters['rus_ServiceName']\n\n$service = Get-Service -Name $name -ErrorAction SilentlyContinue\n\nif (-not $service) {\n    Write-Host \">>> $name service not found. Skipping this time.\"\n    return\n}\n\nWrite-Host \">>> Uninstalling with: sc.exe\"\nif ($service.Status -eq 'Running') {\n    &\"sc.exe\" stop $name | Write-Host\n}\n&\"sc.exe\" delete $name | Write-Host\n\n$limit = 15\nwhile (Get-Service -Name $name -ErrorAction SilentlyContinue) {\n    Start-Sleep -s 1\n    \n    $limit = $limit - 1\n    if ($limit -eq 0) {\n        Throw \"Unable to stop Redis service within 15s\"\n    }\n}",
+    "Octopus.Action.Script.ScriptFileName": "",
+    "Octopus.Action.Package.FeedId": "",
+    "Octopus.Action.Package.PackageId": ""
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "rus_ServiceName",
+      "Label": "Service name",
+      "HelpText": null,
+      "DefaultValue": "Redis",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-172-2018011412241574",
+  "LogoAttachmentMimeType": "image/png"
+}

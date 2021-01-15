@@ -1,0 +1,25 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-288",
+  "RelatedDocumentIds": [
+    "ServerTasks-15"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Created",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T13:14:06.540748+00:00",
+  "Message": "Ran task Script run from management console",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "ServerTasks-15",
+      "StartIndex": 9,
+      "Length": 34
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"ServerTasks-31\",\r&para;<br>  \"Name\": \"AdHocScript\",\r&para;<br>  \"Arguments\": {\r&para;<br>    \"EnvironmentIds\": [],\r&para;<br>    \"MachineIds\": [\r&para;<br>      \"Machines-21\"\r&para;<br>    ],\r&para;<br>    \"TargetRoles\": [],\r&para;<br>    \"ScriptBody\": \"Get-Module Invokedsc -list\",\r&para;<br>    \"Syntax\": \"PowerShell\"\r&para;<br>  },\r&para;<br>  \"Description\": \"Script run from management console\",\r&para;<br>  \"QueueTime\": \"2018-01-14T13:14:06.5397448+00:00\",\r&para;<br>  \"QueueTimeExpiry\": \"10675199.02:48:05.4775807\",\r&para;<br>  \"ExecutionTimeExpiry\": \"00:00:00\",\r&para;<br>  \"StartTime\": null,\r&para;<br>  \"LastUpdatedTime\": null,\r&para;<br>  \"CompletedTime\": null,\r&para;<br>  \"ErrorMessage\": \"\",\r&para;<br>  \"ConcurrencyTag\": \"AdHocScript\",\r&para;<br>  \"State\": \"Queued\",\r&para;<br>  \"HasPendingInterruptions\": false,\r&para;<br>  \"HasWarningsOrErrors\": false,\r&para;<br>  \"ServerVersion\": null,\r&para;<br>  \"ServerNodeId\": null,\r&para;<br>  \"LogDifferentiationToken\": \"L9J5BNDM4S\",\r&para;<br>  \"AdditionalDescription\": null,\r&para;<br>  \"DurationSeconds\": 0,\r&para;<br>  \"QueueTimeExpiryDateTimeOffset\": \"9999-12-31T23:59:59.9999999+00:00\",\r&para;<br>  \"ProjectId\": null,\r&para;<br>  \"EnvironmentId\": null,\r&para;<br>  \"TenantId\": null,\r&para;<br>  \"ExtendedViewLogPermissions\": [\r&para;<br>    \"AdministerSystem\"\r&para;<br>  ],\r&para;<br>  \"ExtendedCreatePermissions\": [\r&para;<br>    \"AdministerSystem\"\r&para;<br>  ],\r&para;<br>  \"CanRerun\": true,\r&para;<br>  \"Properties\": {}\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

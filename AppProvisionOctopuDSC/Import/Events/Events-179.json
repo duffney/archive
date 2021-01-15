@@ -1,0 +1,26 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-179",
+  "RelatedDocumentIds": [
+    "Projects-1",
+    "Environments-1"
+  ],
+  "ProjectId": "Projects-1",
+  "EnvironmentId": "Environments-1",
+  "TenantId": null,
+  "Category": "TaskCanceled",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T19:22:31.8462268+00:00",
+  "Message": "Task Deploy ansibleish release 0.0.1 to Development #49 was canceled",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "NotFound",
+      "StartIndex": 5,
+      "Length": 50
+    }
+  ],
+  "Comments": null,
+  "Details": null,
+  "IdentityEstablishedWith": "Session cookie"
+}

@@ -1,0 +1,38 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-81",
+  "RelatedDocumentIds": [
+    "Projects-1",
+    "Environments-1",
+    "Channels-1",
+    "ProjectGroups-1"
+  ],
+  "ProjectId": "Projects-1",
+  "EnvironmentId": "Environments-1",
+  "TenantId": null,
+  "Category": "DeploymentQueued",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T19:17:03.4375039+00:00",
+  "Message": "Deployed ansibleish release 0.0.1 to Development",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Projects-1",
+      "StartIndex": 9,
+      "Length": 10
+    },
+    {
+      "ReferencedDocumentId": "NotFound",
+      "StartIndex": 28,
+      "Length": 5
+    },
+    {
+      "ReferencedDocumentId": "Environments-1",
+      "StartIndex": 37,
+      "Length": 11
+    }
+  ],
+  "Comments": null,
+  "Details": null,
+  "IdentityEstablishedWith": "Session cookie"
+}

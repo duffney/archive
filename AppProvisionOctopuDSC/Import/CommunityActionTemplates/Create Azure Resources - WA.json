@@ -1,0 +1,95 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-50",
+  "Name": "Create Azure Resources - WA",
+  "ExternalId": "c9a3122f-6723-4753-8461-f9fb3e73a513",
+  "Description": "The New-AzureRmAppServicePlan cmdlet creates a new app service plan.\nThe New-AzureRmWebApp cmdlet creates a new web app.",
+  "Version": 1,
+  "ActionType": "Octopus.AzurePowerShell",
+  "Author": "IanMoroney",
+  "Website": "https://library.octopus.com/step-templates/c9a3122f-6723-4753-8461-f9fb3e73a513",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/azure-create-new-webapp.json",
+  "Category": "Azure",
+  "Properties": {
+    "Octopus.Action.Azure.AccountId": "#{AzureAccount}",
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.Script.ScriptBody": "###############################################\n##Step 1: Get Variables\n$ResourceGroupName             = $OctopusParameters[\"ResourceGroupName\"] \n$DeploymentLocation            = $OctopusParameters[\"Location\"] \n$AppServicePlanName            = $OctopusParameters[\"AppServicePlanName\"] \n$AppServicePlanTier            = $OctopusParameters[\"AppServicePlanTier\"]\n$WebAppName                    = $OctopusParameters[\"WebAppName\"]\n$TimeStamp                          = Get-Date -Format ddMMyyyy_hhmmss\n$PublishProfilePath                 = Join-Path -Path $ENV:Temp -ChildPath \"publishprofile$TimeStamp.xml\"\n$AppServiceUse32BitWorkerProcess= $OctopusParameters[\"AppServiceUse32BitWorkerProcess\"] \n###############################################\n\n###############################################\n##Step 2: Check and Create Service Plan\ntry{\n  $ServicePlan= Get-AzureRmAppServicePlan -ResourceGroupName $ResourceGroupName -Name $AppServicePlanName  -ErrorAction SilentlyContinue \n  if ($null -eq $ServicePlan)\n  {\n    Write-Output \"Creating Service Plan\"\n    $ServicePlan=New-AzureRmAppServicePlan -Name $AppServicePlanName -Location $Location -ResourceGroupName $ResourceGroupName -Tier $AppServicePlanTier\n  }\n  else{\n      Write-Output \"Service Plan already set up\"\n  }\n  $WebApp = Get-AzureRmWebApp -ResourceGroupName $ResourceGroupName -Name $WebAppName -ErrorAction SilentlyContinue\n  if($null -eq $WebApp)\n  {\n      Write-Output \"Creating WebApp\"\n      $webApp = New-AzureRmWebApp -Name $WebAppName -AppServicePlan $AppServicePlanName -ResourceGroupName $ResourceGroupName -Location $DeploymentLocation\n  }\n  else {\n      Write-Output \"WebApp already created\"\n  }\n  \n  Write-Output \"setting app to use $AppServiceUse32BitWorkerProcess\" \n  Set-AzureRmWebApp -ResourceGroupName $ResourceGroupName -Name $WebAppName -Use32BitWorkerProcess ([bool]$AppServiceUse32BitWorkerProcess)\n  $null = Get-AzureRmWebAppPublishingProfile -OutputFile $PublishProfilePath -ResourceGroupName $ResourceGroupName -Name $WebAppName -Format WebDeploy -Verbose\n  \n  Write-output \"profile: $(get-content  $PublishProfilePath)\"\n  if (!(Test-Path -Path $PublishProfilePath)){\n    throw [System.IO.FileNotFoundException] \"$PublishProfilePath not found.\"\n  }\n\n    get-childitem $psscriptroot\n}\ncatch{\n  Write-Output \"Cannot add serviceplan/webapp : $AzureAppServicePlanName / $AzureWebAppName\"\n  Write-Output $_\n\n}\n",
+    "Octopus.Action.Package.FeedId": "",
+    "Octopus.Action.Script.ScriptFileName": "",
+    "Octopus.Action.Package.PackageId": ""
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "ResourceGroupName",
+      "Label": "ResourceGroupName",
+      "HelpText": "Enter the name of the resource group you are deploying this Web App into",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "Location",
+      "Label": "DeploymentLocation",
+      "HelpText": "Enter the location (Region) where the service plan is located",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "AppServicePlanName",
+      "Label": "AppServicePlanName",
+      "HelpText": "Enter the name of the app service plan",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "AppServicePlanTier",
+      "Label": "AppServicePlanTier",
+      "HelpText": "Enter the tier of the app service plan",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "WebAppName",
+      "Label": "WebAppName",
+      "HelpText": "Enter the name of your web app",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "AppServiceUse32BitWorkerProcess",
+      "Label": "AppServiceUse32BitWorkerProcess",
+      "HelpText": "Sets the app pool for 32-bit processes or 64-bit processes.\nUse 1 for 32-bit\nUse 0 for 64-bit",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "AzureAccount",
+      "Label": "AzureAccount",
+      "HelpText": "Enter the SPN used to connect to Azure",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-287-2018032008440752",
+  "LogoAttachmentMimeType": "image/png"
+}

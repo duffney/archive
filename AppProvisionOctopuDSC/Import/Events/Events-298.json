@@ -1,0 +1,43 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-298",
+  "RelatedDocumentIds": [
+    "Projects-2",
+    "Environments-1",
+    "Channels-2",
+    "ProjectGroups-1"
+  ],
+  "ProjectId": "Projects-2",
+  "EnvironmentId": "Environments-1",
+  "TenantId": null,
+  "Category": "DeploymentStarted",
+  "UserId": "users-system",
+  "Username": "system",
+  "Occurred": "2018-01-16T17:43:25.2465566+00:00",
+  "Message": "Deploy to Development started  for InvokeDsc release 2.0.92 to Development",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "NotFound",
+      "StartIndex": 0,
+      "Length": 21
+    },
+    {
+      "ReferencedDocumentId": "Projects-2",
+      "StartIndex": 35,
+      "Length": 9
+    },
+    {
+      "ReferencedDocumentId": "NotFound",
+      "StartIndex": 53,
+      "Length": 6
+    },
+    {
+      "ReferencedDocumentId": "Environments-1",
+      "StartIndex": 63,
+      "Length": 11
+    }
+  ],
+  "Comments": null,
+  "Details": null,
+  "IdentityEstablishedWith": "Unknown"
+}

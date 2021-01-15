@@ -1,0 +1,63 @@
+{
+  "$type": "Octopus.Core.Model.Variables.VariableSet, Octopus.Core",
+  "Id": "variableset-Projects-3",
+  "OwnerId": "Projects-3",
+  "Version": 7,
+  "Variables": [
+    {
+      "Id": "8f79b053-a4c2-82f9-2c12-b4b02c26f8cc",
+      "Name": "DSCResourcesToExecute:appPool:idleTimeoutAction",
+      "Description": null,
+      "Type": "String",
+      "Value": "Terminate"
+    },
+    {
+      "Id": "f4c8ba52-35f9-ce83-68b0-417a0293520c",
+      "Name": "DSCResourcesToExecute:LogAccess:Principal",
+      "Description": null,
+      "Type": "String",
+      "Value": "IIS APPPOOL\\webApp"
+    },
+    {
+      "Id": "1b6fb6a2-0b2f-bca6-c5e8-fcb795f56663",
+      "Name": "DSCResourcesToExecute:webApp:WebAppPool",
+      "Description": null,
+      "Type": "String",
+      "Value": "webApp"
+    },
+    {
+      "Id": "7844483f-994f-0d20-e617-7e921b6aeee7",
+      "Name": "DSCResourcesToExecute:appPool:name",
+      "Description": null,
+      "Type": "String",
+      "Value": "webApp"
+    },
+    {
+      "Id": "3b835f31-7742-9a70-36ec-84802218f9ad",
+      "Name": "webAppLogsDestinationPath",
+      "Description": null,
+      "Type": "String",
+      "Value": "c:\\\\logs\\\\webApp",
+      "Scope": {
+        "Environment": [
+          "Environments-1"
+        ]
+      }
+    },
+    {
+      "Id": "83e473aa-ef44-958a-29e6-28c5f0b7526c",
+      "Name": "WebAppDestinationPath",
+      "Description": null,
+      "Type": "String",
+      "Value": "c:\\\\webApp",
+      "Scope": {
+        "Environment": [
+          "Environments-1"
+        ]
+      }
+    }
+  ],
+  "RelatedDocumentIds": [
+    "Environments-1"
+  ]
+}

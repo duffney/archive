@@ -1,0 +1,26 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-173",
+  "RelatedDocumentIds": [
+    "deploymentprocess-Projects-2",
+    "Projects-2"
+  ],
+  "ProjectId": "Projects-2",
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Modified",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T12:32:45.9053088+00:00",
+  "Message": "Deployment process for InvokeDsc was changed",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Projects-2",
+      "StartIndex": 23,
+      "Length": 9
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"deploymentprocess-Projects-1\",\r&para;<br>  \"OwnerId\": \"Projects-1\",\r&para;<br>  \"Version\": </span><del style=\"background:#ffe6e6;\">1</del><ins style=\"background:#e6ffe6;\">2</ins><span>,\r&para;<br>  \"Steps\": [\r&para;<br>    {\r&para;<br>      \"Id\": \"5744943b-e664-4936-b170-158ae8ac32ed\",\r&para;<br>      \"Name\": \"Deploy PackageManagement\",\r&para;<br>      \"Condition\": \"Always\",\r&para;<br>      \"StartTrigger\": \"StartAfterPrevious\",\r&para;<br>      \"RequiresPackagesToBeAcquired\": false,\r&para;<br>      \"Actions\": [\r&para;<br>        {\r&para;<br>          \"Id\": \"eeb387eb-761e-4836-956d-cd136afa0301\",\r&para;<br>          \"Name\": \"Deploy PackageManagement\",\r&para;<br>          \"ActionType\": \"Octopus.TentaclePackage\",\r&para;<br>          \"IsDisabled\": false,\r&para;<br>          \"Environments\": [],\r&para;<br>          \"ExcludedEnvironments\": [],\r&para;<br>          \"Channels\": [],\r&para;<br>          \"TenantTags\": [],\r&para;<br>          \"Properties\": {\r&para;<br>            \"Octopus.Action.Package.AutomaticallyRunConfigurationTransformationFiles\": \"True\",\r&para;<br>            \"Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings\": \"True\",\r&para;<br>            \"Octopus.Action.EnabledFeatures\": \"Octopus.Features.ConfigurationTransforms,Octopus.Features.ConfigurationVariables\",\r&para;<br>            \"Octopus.Action.Package.DownloadOnTentacle\": \"False\",\r&para;<br>            \"Octopus.Action.Package.FeedId\": \"feeds-psgallery\",\r&para;<br></span><del style=\"background:#ffe6e6;\"></del><span>            \"Octopus.Action.Package.PackageId\": \"PackageManagement\"\r&para;<br>          }\r&para;<br>        }\r&para;<br>      ],\r&para;<br>      \"Properties\": {\r&para;<br>        \"Octopus.Action.TargetRoles\": \"web-server\"\r&para;<br>      }\r&para;<br></span><ins style=\"background:#e6ffe6;\">    },\r&para;<br>    {\r&para;<br>      \"Id\": \"481ada09-b912-4be8-a156-6f9a7f071430\",\r&para;<br>      \"Name\": \"Deploy Pester\",\r&para;<br>      \"Condition\": \"Success\",\r&para;<br>      \"StartTrigger\": \"StartAfterPrevious\",\r&para;<br>      \"RequiresPackagesToBeAcquired\": false,\r&para;<br>      \"Actions\": [\r&para;<br>        {\r&para;<br>          \"Id\": \"b1e58f04-cc5f-4413-9bab-91bbe74fb1f8\",\r&para;<br>          \"Name\": \"Deploy Pester\",\r&para;<br>          \"ActionType\": \"Octopus.TentaclePackage\",\r&para;<br>          \"IsDisabled\": false,\r&para;<br>          \"Environments\": [],\r&para;<br>          \"ExcludedEnvironments\": [],\r&para;<br>          \"Channels\": [],\r&para;<br>          \"TenantTags\": [],\r&para;<br>          \"Properties\": {\r&para;<br>            \"Octopus.Action.Package.AutomaticallyRunConfigurationTransformationFiles\": \"True\",\r&para;<br>            \"Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings\": \"True\",\r&para;<br>            \"Octopus.Action.EnabledFeatures\": \"Octopus.Features.ConfigurationTransforms,Octopus.Features.ConfigurationVariables\",\r&para;<br>            \"Octopus.Action.Package.DownloadOnTentacle\": \"False\",\r&para;<br>            \"Octopus.Action.Package.FeedId\": \"feeds-psgallery\",\r&para;<br>            \"Octopus.Action.Package.PackageId\": \"Pester\"\r&para;<br>          }\r&para;<br>        }\r&para;<br>      ],\r&para;<br>      \"Properties\": {\r&para;<br>        \"Octopus.Action.TargetRoles\": \"web-server\"\r&para;<br>      }\r&para;<br></ins><span>    }\r&para;<br>  ],\r&para;<br>  \"RelatedDocumentIds\": []\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

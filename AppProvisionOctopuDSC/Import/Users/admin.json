@@ -1,0 +1,16 @@
+{
+  "$type": "Octopus.Core.Model.Users.User, Octopus.Core",
+  "Id": "Users-1",
+  "Username": "admin",
+  "DisplayName": "admin",
+  "EmailAddress": null,
+  "Notes": null,
+  "PasswordHashed": "3E8$fBlf1UtJvwLkAqAUhyQsfw==$lGEcVK+YssEcTW1wgrL/4fkUJe2ZOuQd",
+  "IsActive": true,
+  "IsService": false,
+  "ApiKey": null,
+  "IdentificationToken": "2dd0be76-1d4d-45a9-a0db-28fc7117553b",
+  "ExternalIdentifiers": [],
+  "Identities": [],
+  "SecurityGroups": {}
+}

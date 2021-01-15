@@ -1,0 +1,26 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-291",
+  "RelatedDocumentIds": [
+    "variableset-Projects-3",
+    "Projects-3"
+  ],
+  "ProjectId": "Projects-3",
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Modified",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-16T17:32:07.0522905+00:00",
+  "Message": "Variables for webApp were changed",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Projects-3",
+      "StartIndex": 14,
+      "Length": 6
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"variableset-Projects-3\",\r&para;<br>  \"OwnerId\": \"Projects-3\",\r&para;<br>  \"V</span><del style=\"background:#ffe6e6;\">ariables\": [</del><ins style=\"background:#e6ffe6;\">ersion\": 1,\r&para;<br>  \"Variables\": [\r&para;<br>    {\r&para;<br>      \"Id\": \"3b835f31-7742-9a70-36ec-84802218f9ad\",\r&para;<br>      \"Name\": \"webAppLogsDestinationPath\",\r&para;<br>      \"Description\": null,\r&para;<br>      \"Type\": \"String\",\r&para;<br>      \"Value\": \"c:\\\\\\\\webApp\\\\\\\\logs\",\r&para;<br>      \"Scope\": {\r&para;<br>        \"Environment\": [\r&para;<br>          \"Environments-1\"\r&para;<br>        ]\r&para;<br>      }\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"Id\": \"83e473aa-ef44-958a-29e6-28c5f0b7526c\",\r&para;<br>      \"Name\": \"WebAppDestinationPath\",\r&para;<br>      \"Description\": null,\r&para;<br>      \"Type\": \"String\",\r&para;<br>      \"Value\": \"c:\\\\\\\\webApp\",\r&para;<br>      \"Scope\": {\r&para;<br>        \"Environment\": [\r&para;<br>          \"Environments-1\"\r&para;<br>        ]\r&para;<br>      }\r&para;<br>    }\r&para;<br>  </ins><span>],\r&para;<br>  \"RelatedDocumentIds\": [</span><ins style=\"background:#e6ffe6;\">\r&para;<br>    \"Environments-1\"\r&para;<br>  </ins><span>]\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

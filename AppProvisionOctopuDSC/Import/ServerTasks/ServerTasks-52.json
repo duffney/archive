@@ -1,0 +1,41 @@
+{
+  "$type": "Octopus.Core.Model.ServerTasks.ServerTask, Octopus.Core",
+  "Id": "ServerTasks-52",
+  "Name": "Health",
+  "Arguments": {
+    "EnvironmentId": null,
+    "MachinePolicyId": null,
+    "MachineIds": [
+      null
+    ],
+    "Timeout": "00:05:00",
+    "MachineTimeout": "00:01:00",
+    "OnlyTestConnection": false
+  },
+  "Description": "Test connectivity to D06CEEB923A1",
+  "QueueTime": "2018-01-14T12:43:12.2780418+00:00",
+  "QueueTimeExpiry": "10675199.02:48:05.4775807",
+  "ExecutionTimeExpiry": "00:00:00",
+  "StartTime": "2018-01-14T12:43:12.2904211+00:00",
+  "LastUpdatedTime": "2018-01-14T12:43:27.5554507+00:00",
+  "CompletedTime": "2018-01-14T12:43:27.5554507+00:00",
+  "ErrorMessage": "",
+  "ConcurrencyTag": null,
+  "State": "Success",
+  "HasPendingInterruptions": false,
+  "HasWarningsOrErrors": true,
+  "ServerVersion": "4.1.4+Branch.master.Sha.8582c6610adebd0404ec12b1e2ec662d1dfa4cee",
+  "ServerNodeId": "OctopusServerNodes-3068C0FBA62D",
+  "LogDifferentiationToken": "S4BDJESU9Y",
+  "AdditionalDescription": null,
+  "DurationSeconds": 7,
+  "ChildTaskCount": 0,
+  "QueueTimeExpiryDateTimeOffset": "9999-12-31T23:59:59.9999999+00:00",
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "ExtendedViewLogPermissions": [],
+  "ExtendedCreatePermissions": [],
+  "CanRerun": true,
+  "Properties": {}
+}

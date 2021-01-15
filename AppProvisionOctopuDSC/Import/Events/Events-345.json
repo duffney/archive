@@ -1,0 +1,26 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-345",
+  "RelatedDocumentIds": [
+    "Machines-1",
+    "Environments-1"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": "Environments-1",
+  "TenantId": null,
+  "Category": "MachineUnavailable",
+  "UserId": "users-system",
+  "Username": "system",
+  "Occurred": "2018-04-05T18:17:28.2079147+00:00",
+  "Message": "Machine WEB1 became unavailable",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Machines-1",
+      "StartIndex": 8,
+      "Length": 4
+    }
+  ],
+  "Comments": null,
+  "Details": "An error occurred when sending a request to 'https://web1:10933/', before the request could begin: The client was unable to establish the initial connection within 00:01:00\r\nThe client was unable to establish the initial connection within 00:01:00",
+  "IdentityEstablishedWith": "Unknown"
+}

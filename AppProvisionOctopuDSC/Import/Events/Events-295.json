@@ -1,0 +1,30 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-295",
+  "RelatedDocumentIds": [
+    "Projects-2"
+  ],
+  "ProjectId": "Projects-2",
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Created",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-16T17:43:19.7780545+00:00",
+  "Message": "InvokeDsc release 2.0.92 was created",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Projects-2",
+      "StartIndex": 0,
+      "Length": 9
+    },
+    {
+      "ReferencedDocumentId": "NotFound",
+      "StartIndex": 18,
+      "Length": 6
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"Releases-1\",\r&para;<br>  \"Version\": \"2.0.92\",\r&para;<br>  \"ReleaseNotes\": null,\r&para;<br>  \"Assembled\": \"2018-01-16T17:43:19.5933326+00:00\",\r&para;<br>  \"ReleaseDefects\": [],\r&para;<br>  \"ProjectId\": \"Projects-2\",\r&para;<br>  \"ProjectVariableSetSnapshotId\": \"variableset-Projects-2-s-0-7EUQJ\",\r&para;<br>  \"ProjectDeploymentProcessSnapshotId\": \"deploymentprocess-Projects-2-s-8-XHY2C\",\r&para;<br>  \"LibraryVariableSetSnapshots\": [],\r&para;<br>  \"SelectedPackages\": [\r&para;<br>    {\r&para;<br>      \"ActionName\": \"Deploy PackageManagement\",\r&para;<br>      \"Version\": \"1.1.7.0\"\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"ActionName\": \"Deploy Pester\",\r&para;<br>      \"Version\": \"4.1.1\"\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"ActionName\": \"Deploy InvokeDsc\",\r&para;<br>      \"Version\": \"2.0.92\"\r&para;<br>    }\r&para;<br>  ],\r&para;<br>  \"ChannelId\": \"Channels-2\"\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

@@ -1,0 +1,17 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-206",
+  "RelatedDocumentIds": [],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Imported",
+  "UserId": "User Manager",
+  "Username": "ContainerAdministrator",
+  "Occurred": "2018-01-17T15:02:47.6084345+00:00",
+  "Message": "Imported documents using Octopus migration tools",
+  "MessageReferences": [],
+  "Comments": null,
+  "Details": "  Created.........................................839\r\n    ActionTemplate................................2\r\n    ActionTemplateVersion.........................3\r\n    Attachment....................................267\r\n    Channel.......................................3\r\n    CommunityActionTemplate.......................267\r\n    DeploymentEnvironment.........................1\r\n    DeploymentProcess.............................4\r\n    Event.........................................231\r\n    NuGetFeed.....................................1\r\n    Project.......................................3\r\n    ServerTask....................................54\r\n    VariableSet...................................3\r\n  Missing dependencies............................2\r\n    Deployment....................................1\r\n    ServerTask....................................1\r\n  Skipped (incomplete)............................2\r\n    Event.........................................2\r\n  Skipped (key collision).........................30\r\n    Event.........................................18\r\n    ServerTask....................................12\r\n  Skipped (no overwrite)..........................23\r\n    CertificateConfiguration......................1\r\n    FeaturesConfiguration.........................1\r\n    Lifecycle.....................................1\r\n    MachinePolicy.................................1\r\n    NuGetFeed.....................................1\r\n    ProjectGroup..................................1\r\n    ServerConfiguration...........................1\r\n    SmtpConfiguration.............................1\r\n    Team..........................................2\r\n    User..........................................1\r\n    UserRole......................................11\r\n    WebPortalConfiguration........................1\r\n  Unchanged.......................................6\r\n    ExtensionConfiguration........................6\r\n",
+  "IdentityEstablishedWith": "Command-line or tools"
+}

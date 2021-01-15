@@ -1,0 +1,75 @@
+{
+  "$type": "Octopus.Core.Model.Projects.DeploymentProcess, Octopus.Core",
+  "Id": "deploymentprocess-Projects-1",
+  "OwnerId": "Projects-1",
+  "Version": 4,
+  "Steps": [
+    {
+      "Id": "c236f34c-9ab9-4a5e-a62b-fd709c0aa8d6",
+      "Name": "Deploy ansibleish",
+      "Condition": "Always",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "786bcd34-77f4-4265-8d7a-ded27369738c",
+          "Name": "Deploy ansibleish",
+          "ActionType": "Octopus.TentaclePackage",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.Package.AutomaticallyRunConfigurationTransformationFiles": "True",
+            "Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings": "True",
+            "Octopus.Action.EnabledFeatures": "Octopus.Features.ConfigurationTransforms,Octopus.Features.ConfigurationVariables",
+            "Octopus.Action.Package.DownloadOnTentacle": "False",
+            "Octopus.Action.Package.FeedId": "feeds-builtin",
+            "Octopus.Action.Package.PackageId": "ansibleish"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "2ce9fe7a-2d86-4800-8d4c-46228a60f48e",
+      "Name": "Invoke-Playbook",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "7588c39a-dd91-493c-92ea-6f1977d54e94",
+          "Name": "Invoke-Playbook",
+          "ActionType": "Octopus.Script",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.Script.ScriptSource": "Inline",
+            "Octopus.Action.Script.Syntax": "PowerShell",
+            "Octopus.Action.Script.ScriptBody": "#Requires -Version 5\n\n. \"$Path\\scripts\\Invoke-Playbook.ps1\"\n\n$splat = @{\n        Path = $Path\n        HostName = $HostName\n        Repository = $Repository\n        inventoryName = $inventoryName\n    }\n    if ($Include)\n    {\n        $Include = $Include -split ','\n        $splat.Add('Include',$Include)\n    }\n    elseif ($Exclude)\n    {\n        $Exclude = $Exclude -split ','\n        $splat.Add('Exclude',$Exclude)\n    }\n\nInvoke-Playbook @splat",
+            "Octopus.Action.Template.Version": "1",
+            "Octopus.Action.Template.Id": "ActionTemplates-2",
+            "Repository": "PSGallery",
+            "Octopus.Action.RunOnServer": "false",
+            "HostName": "#{Octopus.Machine.Name}",
+            "Path": "#{Octopus.Action[Deploy ansibleish].Output.Package.InstallationDirectoryPath}",
+            "inventoryName": "inventory.json"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    }
+  ],
+  "RelatedDocumentIds": [
+    "ActionTemplates-2"
+  ]
+}

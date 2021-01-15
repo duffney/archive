@@ -1,0 +1,76 @@
+{
+  "$type": "Octopus.Core.Model.Projects.ActionTemplate, Octopus.Core",
+  "Id": "ActionTemplates-2",
+  "Name": "Invoke-Playbook",
+  "Description": null,
+  "Version": 1,
+  "ActionType": "Octopus.Script",
+  "CommunityActionTemplateId": null,
+  "Properties": {
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.Script.Syntax": "PowerShell",
+    "Octopus.Action.Script.ScriptBody": "#Requires -Version 5\n\n. \"$Path\\scripts\\Invoke-Playbook.ps1\"\n\n$splat = @{\n        Path = $Path\n        HostName = $HostName\n        Repository = $Repository\n        inventoryName = $inventoryName\n    }\n    if ($Include)\n    {\n        $Include = $Include -split ','\n        $splat.Add('Include',$Include)\n    }\n    elseif ($Exclude)\n    {\n        $Exclude = $Exclude -split ','\n        $splat.Add('Exclude',$Exclude)\n    }\n\nInvoke-Playbook @splat"
+  },
+  "Parameters": [
+    {
+      "Id": "22f08367-3792-4f17-a63c-837e45da4e5e",
+      "Name": "HostName",
+      "Label": "",
+      "HelpText": "Host name of the node being targeted",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": "fe7d0e53-a8d8-4d66-a8b3-b7ba10542458",
+      "Name": "Path",
+      "Label": "",
+      "HelpText": "Path of JSON configuration documents",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": "d0b3662b-4ccb-4c7c-ab0c-75502894b484",
+      "Name": "Repository",
+      "Label": "",
+      "HelpText": "Specify PowerShell Package Source",
+      "DefaultValue": "PSGallery",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": "5d5f2d5a-ebc6-4b90-aaa3-7e880526b1e3",
+      "Name": "Exclude",
+      "Label": "",
+      "HelpText": "Enter any in-scope roles found in inventory.json to skip during this action.",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "MultiLineText"
+      }
+    },
+    {
+      "Id": "31b37b90-8f37-44f0-b7af-dd4064f5f24b",
+      "Name": "Include",
+      "Label": "",
+      "HelpText": "Enter any roles to specifically include",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "MultiLineText"
+      }
+    },
+    {
+      "Id": "a743d056-424d-4ada-b0ba-b945998070bb",
+      "Name": "inventoryName",
+      "Label": "",
+      "HelpText": "The full name of the inventory.json file to use. Examples: inventory.json, inventory-staging.json, etc.",
+      "DefaultValue": "inventory.json",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    }
+  ]
+}

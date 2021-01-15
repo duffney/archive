@@ -1,0 +1,17 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-311",
+  "RelatedDocumentIds": [],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Deleted",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T19:22:05.098926+00:00",
+  "Message": "Package ansibleish version 0.0.1 was deleted from the built-in repository via the Packages API",
+  "MessageReferences": [],
+  "Comments": null,
+  "Details": null,
+  "IdentityEstablishedWith": "Command-line or tools"
+}

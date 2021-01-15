@@ -1,0 +1,75 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-31",
+  "Name": "Azure Site Extensions - Install",
+  "ExternalId": "7518eaa0-677c-4562-82d5-a131f29e1744",
+  "Description": "Installs an Azure [site extension](https://www.siteextensions.net) in your Azure web app.",
+  "Version": 1,
+  "ActionType": "Octopus.AzureResourceGroup",
+  "Author": "alfhenrik",
+  "Website": "https://library.octopus.com/step-templates/7518eaa0-677c-4562-82d5-a131f29e1744",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/azure-site-extensions-install.json",
+  "Category": "Azure Site Extensions",
+  "Properties": {
+    "Octopus.Action.Azure.ResourceGroupName": "#{AzSiteExt_ResourceGroupName}",
+    "Octopus.Action.Azure.TemplateSource": "Inline",
+    "Octopus.Action.Azure.ResourceGroupTemplateParameters": "{\"siteName\":{\"value\":\"#{AzSiteExt_SiteName}\"},\"extensionName\":{\"value\":\"#{AzSiteExt_ExtensionName}\"},\"appServicePlanName\":{\"value\":\"#{AzSiteExt_AppServicePlanName}\"}}",
+    "Octopus.Action.Azure.ResourceGroupDeploymentMode": "Incremental",
+    "Octopus.Action.Azure.ResourceGroupTemplate": "{\r\n    \"$schema\": \"http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#\",\r\n    \"contentVersion\": \"1.0.0.0\",\r\n    \"parameters\": {        \r\n        \"siteName\": {\r\n            \"type\": \"string\",\r\n            \"metadata\": {\r\n                \"description\": \"Web site name\"\r\n            }\r\n        },\r\n        \"appServicePlanName\": {\r\n            \"type\": \"string\",\r\n            \"metadata\": {\r\n                \"description\": \"App service plan name\"\r\n            }\r\n        },\r\n        \"extensionName\": {\r\n            \"type\": \"string\",\r\n            \"metadata\": {\r\n                \"description\": \"Extension name\"\r\n            }\r\n        }  \r\n    },\r\n    \"variables\": {  \r\n        \"extensionApi\": \"2015-06-01\"\r\n    },\r\n    \"resources\": [\r\n        {\r\n            \"apiVersion\": \"[variables('extensionApi')]\",\r\n            \"name\": \"[parameters('siteName')]\",\r\n            \"type\": \"Microsoft.Web/sites\",\r\n            \"location\": \"[resourceGroup().location]\",\r\n            \"dependsOn\": [],\r\n            \"properties\": {\r\n                \"name\": \"[parameters('siteName')]\",\r\n                \"serverFarmId\": \"[parameters('appServicePlanName')]\"\r\n            },\r\n            \"resources\": [\r\n                {\r\n                    \"apiVersion\": \"[variables('extensionApi')]\",\r\n                    \"name\": \"[parameters('extensionName')]\",\r\n                    \"type\": \"siteextensions\",\r\n                    \"dependsOn\": [\r\n                        \"[resourceId('Microsoft.Web/Sites', parameters('siteName'))]\"\r\n                    ],\r\n                    \"properties\": {}\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+    "Octopus.Action.Azure.AccountId": "#{AzSiteExt_AzureAccountId}"
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "AzSiteExt_ResourceGroupName",
+      "Label": "Resource group name",
+      "HelpText": "The Resource Group of your Azure Web App.",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "AzSiteExt_SiteName",
+      "Label": "Site name",
+      "HelpText": "The name of your Azure Web App.",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "AzSiteExt_AppServicePlanName",
+      "Label": "App service plan name",
+      "HelpText": "The App Service Plan of your Azure Web App.",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "AzSiteExt_ExtensionName",
+      "Label": "Site extension name",
+      "HelpText": "The package name of the extension you want to install.\n\nThe extensions available to be installed can be found on the [siteextensions.net](https://www.siteextensions.net/packages) website. The name of the package can be derived from the URL of the extension (e.g. for the Application Insights extension the URL is `https://www.siteextensions.net/packages/Microsoft.ApplicationInsights.AzureWebSites/`, so the package name is `Microsoft.ApplicationInsights.AzureWebSites`).",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "AzSiteExt_AzureAccountId",
+      "Label": "Azure account ID",
+      "HelpText": "The Azure account to use for the connection.\n\n**NOTE:** a **service principal** account is required, a **management certificate** account will not work.",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-25-2018011412241431",
+  "LogoAttachmentMimeType": "image/png"
+}

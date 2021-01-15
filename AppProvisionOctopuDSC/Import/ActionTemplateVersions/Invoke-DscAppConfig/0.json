@@ -1,0 +1,37 @@
+{
+  "$type": "Octopus.Core.Model.Projects.ActionTemplateVersion, Octopus.Core",
+  "LatestActionTemplateId": "ActionTemplates-1",
+  "Id": "ActionTemplateVersions-1",
+  "Name": "Invoke-DscAppConfig",
+  "Description": "Converts targeted json file to PSCustomObjects and invokes them with InvokeDSC module.",
+  "Version": 0,
+  "ActionType": "Octopus.Script",
+  "CommunityActionTemplateId": null,
+  "Properties": {
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.Script.Syntax": "PowerShell",
+    "Octopus.Action.Script.ScriptBody": "try\n{\n\tImport-Module InvokeDSC -Force\n}\ncatch [System.IO.FileNotFoundException]\n{\n\tthrow 'InvokeDSC module not found'\n}\n\n$splat = @{\n    Path = $Path\n    Repository = $Repository\n}\n\nInvoke-DscConfiguration @splat"
+  },
+  "Parameters": [
+    {
+      "Id": "12a60b8c-b213-4cfe-a972-3dc45cd9ec54",
+      "Name": "Path",
+      "Label": "",
+      "HelpText": null,
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": "d3f6fcf1-c179-4aed-bb93-44f2ab44abcc",
+      "Name": "Repository",
+      "Label": "",
+      "HelpText": null,
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    }
+  ]
+}

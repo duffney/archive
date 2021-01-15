@@ -1,0 +1,25 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-182",
+  "RelatedDocumentIds": [
+    "ActionTemplates-2"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Modified",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T19:23:43.1710748+00:00",
+  "Message": "ActionTemplate Invoke-Playbook was modified",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "ActionTemplates-2",
+      "StartIndex": 15,
+      "Length": 15
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"ActionTemplates-1\",\r&para;<br>  \"Name\": \"Invoke-Playbook\",\r&para;<br>  \"Description\": null,\r&para;<br>  \"Version\": </span><del style=\"background:#ffe6e6;\">0</del><ins style=\"background:#e6ffe6;\">1</ins><span>,\r&para;<br>  \"ActionType\": \"Octopus.Script\",\r&para;<br>  \"CommunityActionTemplateId\": null,\r&para;<br>  \"Properties\": {\r&para;<br>    \"Octopus.Action.Script.ScriptSource\": \"Inline\",\r&para;<br>    \"Octopus.Action.Script.Syntax\": \"PowerShell\",\r&para;<br>    \"Octopus.Action.Script.ScriptBody\": \"#Requires -Version 5\\n\\n. \\\"$Path\\\\scripts\\\\Invoke-Playbook.ps1\\\"\\n\\n$splat = @{\\n        Path = $Path\\n        HostName = $HostName\\n        Repository = $Repository\\n        inventoryName = $inventoryName\\n    }\\n    if ($Include)\\n    {\\n        $Include = $Include -split ','\\n        $splat.Add('Include',$Include)\\n    }\\n    elseif ($Exclude)\\n    {\\n        $Exclude = $Exclude -split ','\\n        $splat.Add('Exclude',$Exclude)\\n    }\\n\\nInvoke-Playbook @splat\"\r&para;<br>  },\r&para;<br>  \"Parameters\": [\r&para;<br>    {\r&para;<br>      \"Id\": \"22f08367-3792-4f17-a63c-837e45da4e5e\",\r&para;<br>      \"Name\": \"HostName\",\r&para;<br>      \"Label\": \"\",\r&para;<br>      \"HelpText\": \"Host name of the node being targeted\",\r&para;<br>      \"DefaultValue\": \"\",\r&para;<br>      \"DisplaySettings\": {\r&para;<br>        \"Octopus.ControlType\": \"SingleLineText\"\r&para;<br>      }\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"Id\": \"fe7d0e53-a8d8-4d66-a8b3-b7ba10542458\",\r&para;<br>      \"Name\": \"Path\",\r&para;<br>      \"Label\": \"\",\r&para;<br>      \"HelpText\": \"Path of JSON configuration documents\",\r&para;<br>      \"DefaultValue\": \"\",\r&para;<br>      \"DisplaySettings\": {\r&para;<br>        \"Octopus.ControlType\": \"SingleLineText\"\r&para;<br>      }\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"Id\": \"d0b3662b-4ccb-4c7c-ab0c-75502894b484\",\r&para;<br>      \"Name\": \"Repository\",\r&para;<br>      \"Label\": \"\",\r&para;<br>      \"HelpText\": \"Specify PowerShell Package Source\",\r&para;<br>      \"DefaultValue\": \"PSGallery\",\r&para;<br>      \"DisplaySettings\": {\r&para;<br>        \"Octopus.ControlType\": \"SingleLineText\"\r&para;<br>      }\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"Id\": \"5d5f2d5a-ebc6-4b90-aaa3-7e880526b1e3\",\r&para;<br>      \"Name\": \"Exclude\",\r&para;<br>      \"Label\": \"\",\r&para;<br>      \"HelpText\": \"Enter any in-scope roles found in inventory.json to skip during this action.\",\r&para;<br>      \"DefaultValue\": \"\",\r&para;<br>      \"DisplaySettings\": {\r&para;<br>        \"Octopus.ControlType\": \"MultiLineText\"\r&para;<br>      }\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"Id\": \"31b37b90-8f37-44f0-b7af-dd4064f5f24b\",\r&para;<br>      \"Name\": \"Include\",\r&para;<br>      \"Label\": \"\",\r&para;<br>      \"HelpText\": \"Enter any roles to specifically include\",\r&para;<br>      \"DefaultValue\": \"\",\r&para;<br>      \"DisplaySettings\": {\r&para;<br>        \"Octopus.ControlType\": \"MultiLineText\"\r&para;<br>      }\r&para;<br></span><ins style=\"background:#e6ffe6;\">    },\r&para;<br>    {\r&para;<br>      \"Id\": \"a743d056-424d-4ada-b0ba-b945998070bb\",\r&para;<br>      \"Name\": \"inventoryName\",\r&para;<br>      \"Label\": \"\",\r&para;<br>      \"HelpText\": \"The full name of the inventory.json file to use. Examples: inventory.json, inventory-staging.json, etc.\",\r&para;<br>      \"DefaultValue\": \"inventory.json\",\r&para;<br>      \"DisplaySettings\": {\r&para;<br>        \"Octopus.ControlType\": \"SingleLineText\"\r&para;<br>      }\r&para;<br></ins><span>    }\r&para;<br>  ]\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

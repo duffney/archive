@@ -1,0 +1,25 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-346",
+  "RelatedDocumentIds": [
+    "feeds-builtin"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Created",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-04-05T18:17:28.3923487+00:00",
+  "Message": "Package cNtfsAccessControl version 1.3.0 was pushed to the builtin feed",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "feeds-builtin",
+      "StartIndex": 59,
+      "Length": 7
+    }
+  ],
+  "Comments": null,
+  "Details": null,
+  "IdentityEstablishedWith": "Session cookie"
+}

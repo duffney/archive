@@ -1,0 +1,25 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-310",
+  "RelatedDocumentIds": [
+    "Projects-1"
+  ],
+  "ProjectId": "Projects-1",
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Created",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T13:56:51.0569823+00:00",
+  "Message": "Project ansibleish was created",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Projects-1",
+      "StartIndex": 8,
+      "Length": 10
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"Projects-21\",\r&para;<br>  \"Name\": \"ansibleish\",\r&para;<br>  \"Description\": \"\",\r&para;<br>  \"Slug\": \"ansibleish\",\r&para;<br>  \"IsDisabled\": false,\r&para;<br>  \"VariableSetId\": null,\r&para;<br>  \"DeploymentProcessId\": null,\r&para;<br>  \"ProjectGroupId\": \"ProjectGroups-1\",\r&para;<br>  \"LifecycleId\": \"Lifecycles-1\",\r&para;<br>  \"AutoCreateRelease\": false,\r&para;<br>  \"DiscreteChannelRelease\": false,\r&para;<br>  \"IncludedLibraryVariableSetIds\": [],\r&para;<br>  \"UsedPackages\": [],\r&para;<br>  \"DefaultToSkipIfAlreadyInstalled\": false,\r&para;<br>  \"TenantedDeploymentMode\": \"Untenanted\",\r&para;<br>  \"VersioningStrategy\": {\r&para;<br>    \"DonorPackageStepId\": null,\r&para;<br>    \"Template\": \"#{Octopus.Version.LastMajor}.#{Octopus.Version.LastMinor}.#{Octopus.Version.NextPatch}\"\r&para;<br>  },\r&para;<br>  \"DefaultGuidedFailureMode\": \"EnvironmentDefault\",\r&para;<br>  \"Templates\": [],\r&para;<br>  \"ReleaseCreationStrategy\": {\r&para;<br>    \"ReleaseCreationPackageStepId\": null,\r&para;<br>    \"ChannelId\": null\r&para;<br>  },\r&para;<br>  \"ProjectConnectivityPolicy\": {\r&para;<br>    \"SkipMachineBehavior\": \"None\",\r&para;<br>    \"TargetRoles\": [],\r&para;<br>    \"AllowDeploymentsToNoTargets\": false\r&para;<br>  },\r&para;<br>  \"AutoDeployReleaseOverrides\": []\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

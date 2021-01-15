@@ -1,0 +1,7 @@
+{
+  "$type": "Octopus.Core.Model.Extensions.ExtensionConfiguration, Octopus.Core",
+  "Id": "authentication-od",
+  "Name": "Okta",
+  "ExtensionAuthor": "Octopus Deploy",
+  "Json": null
+}

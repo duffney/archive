@@ -1,0 +1,38 @@
+{
+  "$type": "Octopus.Core.Model.Projects.Project, Octopus.Core",
+  "Id": "Projects-2",
+  "Name": "InvokeDsc",
+  "Description": "",
+  "Slug": "invokedsc",
+  "IsDisabled": false,
+  "VariableSetId": "variableset-Projects-2",
+  "DeploymentProcessId": "deploymentprocess-Projects-2",
+  "ProjectGroupId": "ProjectGroups-1",
+  "LifecycleId": "Lifecycles-1",
+  "AutoCreateRelease": false,
+  "DiscreteChannelRelease": false,
+  "IncludedLibraryVariableSetIds": [],
+  "UsedPackages": [
+    "InvokeDSC",
+    "PackageManagement",
+    "Pester"
+  ],
+  "DefaultToSkipIfAlreadyInstalled": false,
+  "TenantedDeploymentMode": "Untenanted",
+  "VersioningStrategy": {
+    "DonorPackageStepId": "5b15e075-03b3-432c-8164-e07b9bc3df38",
+    "Template": null
+  },
+  "DefaultGuidedFailureMode": "EnvironmentDefault",
+  "Templates": [],
+  "ReleaseCreationStrategy": {
+    "ReleaseCreationPackageStepId": "",
+    "ChannelId": null
+  },
+  "ProjectConnectivityPolicy": {
+    "SkipMachineBehavior": "None",
+    "TargetRoles": [],
+    "AllowDeploymentsToNoTargets": false
+  },
+  "AutoDeployReleaseOverrides": []
+}

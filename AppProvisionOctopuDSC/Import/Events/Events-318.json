@@ -1,0 +1,30 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-318",
+  "RelatedDocumentIds": [
+    "Projects-3"
+  ],
+  "ProjectId": "Projects-3",
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Deleted",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-16T17:57:07.3002696+00:00",
+  "Message": "webApp release 0.0.1 was deleted",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Projects-3",
+      "StartIndex": 0,
+      "Length": 6
+    },
+    {
+      "ReferencedDocumentId": "NotFound",
+      "StartIndex": 15,
+      "Length": 5
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{</span><del style=\"background:#ffe6e6;\">\r&para;<br>  \"Id\": \"Releases-3\",\r&para;<br>  \"Version\": \"0.0.1\",\r&para;<br>  \"ReleaseNotes\": null,\r&para;<br>  \"Assembled\": \"2018-01-16T17:52:12.3640245+00:00\",\r&para;<br>  \"ReleaseDefects\": [],\r&para;<br>  \"ProjectId\": \"Projects-3\",\r&para;<br>  \"ProjectVariableSetSnapshotId\": \"variableset-Projects-3-s-2-B8QGV\",\r&para;<br>  \"ProjectDeploymentProcessSnapshotId\": \"deploymentprocess-Projects-3-s-10-26H4J\",\r&para;<br>  \"LibraryVariableSetSnapshots\": [],\r&para;<br>  \"SelectedPackages\": [\r&para;<br>    {\r&para;<br>      \"ActionName\": \"Deploy webApp\",\r&para;<br>      \"Version\": \"0.0.1\"\r&para;<br>    }\r&para;<br>  ],\r&para;<br>  \"ChannelId\": \"Channels-3\"\r&para;<br></del><span>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

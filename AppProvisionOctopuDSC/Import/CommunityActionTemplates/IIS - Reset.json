@@ -1,0 +1,58 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-108",
+  "Name": "IIS - Reset",
+  "ExternalId": "2db9af2b-1d9a-4089-9d84-98d9118b39ad",
+  "Description": "Starts, stops, or resets IIS using iisreset",
+  "Version": 1,
+  "ActionType": "Octopus.Script",
+  "Author": "zappy-shu",
+  "Website": "https://library.octopus.com/step-templates/2db9af2b-1d9a-4089-9d84-98d9118b39ad",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/iis-reset.json",
+  "Category": "IIS",
+  "Properties": {
+    "Octopus.Action.Script.Syntax": "PowerShell",
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.RunOnServer": "false",
+    "Octopus.Action.Script.ScriptBody": "$wait = $OctopusParameters[\"iisWait\"] -and [boolean]::Parse($OctopusParameters[\"iisWait\"])\n$action = $OctopusParameters[\"iisAction\"]\n$errorAction = $OctopusParameters[\"iisErrorAction\"]\nif ($Action -eq \"/RESTART\") { Write-Host \"Restarting IIS\" }\nelseif ($Action -eq \"/START\") { Write-Host \"Starting IIS\" }\nelseif ($Action -eq \"/STOP\") { Write-Host \"Stopping IIS\" }\nelse {\n    Write-Error \"Unknown action $action\"\n    exit 1\n}\n\nif (($errorAction -ne \"Stop\") -and ($errorAction -ne \"Continue\") -and ($errorAction -ne \"SilentlyContinue\")) {\n    Write-Error \"Unknown ErrorAction $errorAction\"\n    exit 1\n}\n\nif ($wait) {\n    Write-Host \"Running with wait\"\n    Start-Process -FilePath \"iisreset\" -ArgumentList $Action -ErrorAction $OctopusParameters[\"iisErrorAction\"] -Wait\n}\nelse {\n    Write-Host \"Running without wait\"\n    Start-Process -FilePath \"iisreset\" -ArgumentList $Action -ErrorAction $OctopusParameters[\"iisErrorAction\"]\n}\n",
+    "Octopus.Action.Script.ScriptFileName": "",
+    "Octopus.Action.Package.FeedId": "",
+    "Octopus.Action.Package.PackageId": ""
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "iisWait",
+      "Label": "Wait for command to finish",
+      "HelpText": null,
+      "DefaultValue": "True",
+      "DisplaySettings": {
+        "Octopus.ControlType": "Checkbox"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "iisErrorAction",
+      "Label": "Action on error",
+      "HelpText": "",
+      "DefaultValue": "Stop",
+      "DisplaySettings": {
+        "Octopus.ControlType": "Select",
+        "Octopus.SelectOptions": "Stop|Stop\nContinue|Continue\nSilentlyContinue|SilentlyContinue"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "iisAction",
+      "Label": "Action",
+      "HelpText": "Start, stop, or reset",
+      "DefaultValue": "/RESTART",
+      "DisplaySettings": {
+        "Octopus.ControlType": "Select",
+        "Octopus.SelectOptions": "/RESTART|Restart\n/START|Start\n/STOP|Stop"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-100-2018011412241490",
+  "LogoAttachmentMimeType": "image/png"
+}

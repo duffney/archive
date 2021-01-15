@@ -1,0 +1,8 @@
+{
+  "$type": "Octopus.Migrator.ExportProcess.ScriptMetadata, Octopus.Migrator",
+  "Id": "InvokeDsc",
+  "ProjectName": "InvokeDsc",
+  "StepName": "Set PSGallery Trusted",
+  "ActionName": "Set PSGallery Trusted",
+  "ScriptName": "Script.ps1"
+}

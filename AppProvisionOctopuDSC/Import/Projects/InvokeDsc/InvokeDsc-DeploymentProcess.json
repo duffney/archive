@@ -1,0 +1,155 @@
+{
+  "$type": "Octopus.Core.Model.Projects.DeploymentProcess, Octopus.Core",
+  "Id": "deploymentprocess-Projects-2",
+  "OwnerId": "Projects-2",
+  "Version": 8,
+  "Steps": [
+    {
+      "Id": "5744943b-e664-4936-b170-158ae8ac32ed",
+      "Name": "Deploy PackageManagement",
+      "Condition": "Always",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "eeb387eb-761e-4836-956d-cd136afa0301",
+          "Name": "Deploy PackageManagement",
+          "ActionType": "Octopus.TentaclePackage",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.EnabledFeatures": "Octopus.Features.CustomDirectory",
+            "Octopus.Action.Package.DownloadOnTentacle": "False",
+            "Octopus.Action.Package.FeedId": "feeds-psgallery",
+            "Octopus.Action.Package.PackageId": "PackageManagement",
+            "Octopus.Action.Package.CustomInstallationDirectory": "C:\\Program Files\\WindowsPowerShell\\Modules\\PackageManagement\\#{Octopus.Action.Package.NuGetPackageVersion}",
+            "Octopus.Action.Package.CustomInstallationDirectoryShouldBePurgedBeforeDeployment": "True"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "481ada09-b912-4be8-a156-6f9a7f071430",
+      "Name": "Deploy Pester",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "b1e58f04-cc5f-4413-9bab-91bbe74fb1f8",
+          "Name": "Deploy Pester",
+          "ActionType": "Octopus.TentaclePackage",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.EnabledFeatures": "Octopus.Features.CustomDirectory",
+            "Octopus.Action.Package.DownloadOnTentacle": "False",
+            "Octopus.Action.Package.FeedId": "feeds-psgallery",
+            "Octopus.Action.Package.PackageId": "Pester",
+            "Octopus.Action.Package.CustomInstallationDirectory": "C:\\Program Files\\WindowsPowerShell\\Modules\\Pester\\#{Octopus.Action.Package.NuGetPackageVersion}",
+            "Octopus.Action.Package.CustomInstallationDirectoryShouldBePurgedBeforeDeployment": "True"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "53b11b40-e6be-44be-aa6e-6bfa6a762788",
+      "Name": "Deploy InvokeDsc",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "5b15e075-03b3-432c-8164-e07b9bc3df38",
+          "Name": "Deploy InvokeDsc",
+          "ActionType": "Octopus.TentaclePackage",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.EnabledFeatures": "Octopus.Features.CustomDirectory",
+            "Octopus.Action.Package.DownloadOnTentacle": "False",
+            "Octopus.Action.Package.FeedId": "feeds-psgallery",
+            "Octopus.Action.Package.PackageId": "InvokeDSC",
+            "Octopus.Action.Package.CustomInstallationDirectory": "C:\\Program Files\\WindowsPowerShell\\Modules\\InvokeDSC\\#{Octopus.Action.Package.NuGetPackageVersion}",
+            "Octopus.Action.Package.CustomInstallationDirectoryShouldBePurgedBeforeDeployment": "True"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "99a285eb-682d-41c4-ba30-51117271ae28",
+      "Name": "Set WMI MaxEnvelopeSize",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "ee4494cb-56f8-4c5f-8111-f479fc2d8a8d",
+          "Name": "Set WMI MaxEnvelopeSize",
+          "ActionType": "Octopus.Script",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.RunOnServer": "false",
+            "Octopus.Action.Script.ScriptSource": "Inline",
+            "Octopus.Action.Script.Syntax": "PowerShell",
+            "Octopus.Action.Script.ScriptBody": "Set-WSManInstance -ValueSet @{MaxEnvelopeSizekb = \"1000000\"} -ResourceURI winrm/config"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    },
+    {
+      "Id": "793a6306-267b-4c3f-aa32-8a97a6c5eb45",
+      "Name": "Set PSGallery Trusted",
+      "Condition": "Success",
+      "StartTrigger": "StartAfterPrevious",
+      "PackageRequirement": "LetOctopusDecide",
+      "Actions": [
+        {
+          "Id": "e30879b9-6d90-4376-9879-ba494990cc3a",
+          "Name": "Set PSGallery Trusted",
+          "ActionType": "Octopus.Script",
+          "IsDisabled": false,
+          "Environments": [],
+          "ExcludedEnvironments": [],
+          "Channels": [],
+          "TenantTags": [],
+          "Properties": {
+            "Octopus.Action.RunOnServer": "false",
+            "Octopus.Action.Script.ScriptSource": "Inline",
+            "Octopus.Action.Script.Syntax": "PowerShell",
+            "Octopus.Action.Script.ScriptBody": "if ((Get-PackageSource -Name PSGallery).IsTrusted -ne $true){Set-PackageSource -Name PSGallery -Trusted}"
+          }
+        }
+      ],
+      "Properties": {
+        "Octopus.Action.TargetRoles": "web-server"
+      }
+    }
+  ],
+  "RelatedDocumentIds": []
+}

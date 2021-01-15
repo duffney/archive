@@ -1,0 +1,25 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-232",
+  "RelatedDocumentIds": [
+    "Channels-2"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Modified",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-14T12:31:59.6296281+00:00",
+  "Message": "Channel Default was modified",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "Channels-2",
+      "StartIndex": 8,
+      "Length": 7
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"Channels-1\",\r&para;<br>  \"Name\": \"Default\",\r&para;<br>  \"Description\": null,\r&para;<br>  \"ProjectId\": \"Projects-1\",\r&para;<br>  \"LifecycleId\": null,\r&para;<br>  \"IsDefault\": true,\r&para;<br>  \"TenantTags\": [],\r&para;<br>  \"Rules\": [</span><ins style=\"background:#e6ffe6;\">\r&para;<br>    {\r&para;<br>      \"Id\": \"2080c149-19a6-4861-a374-a442f7f4578e\",\r&para;<br>      \"Actions\": [\r&para;<br>        \"eeb387eb-761e-4836-956d-cd136afa0301\"\r&para;<br>      ],\r&para;<br>      \"VersionRange\": \"(,1.1.7.0]\",\r&para;<br>      \"Tag\": \"\"\r&para;<br>    }\r&para;<br>  </ins><span>]\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

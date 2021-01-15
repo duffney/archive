@@ -1,0 +1,9 @@
+{
+  "$type": "Octopus.Core.Model.Feed.OctopusProjectFeed, Octopus.Core",
+  "Id": "feeds-builtin-releases",
+  "Name": "Octopus Server Releases (built-in)",
+  "FeedUri": "octopus://",
+  "Username": "",
+  "Password": null,
+  "FeedType": "OctopusProject"
+}

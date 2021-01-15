@@ -1,0 +1,36 @@
+{
+  "$type": "Octopus.Core.Model.Projects.Project, Octopus.Core",
+  "Id": "Projects-1",
+  "Name": "ansibleish",
+  "Description": "",
+  "Slug": "ansibleish",
+  "IsDisabled": false,
+  "VariableSetId": "variableset-Projects-1",
+  "DeploymentProcessId": "deploymentprocess-Projects-1",
+  "ProjectGroupId": "ProjectGroups-1",
+  "LifecycleId": "Lifecycles-1",
+  "AutoCreateRelease": false,
+  "DiscreteChannelRelease": false,
+  "IncludedLibraryVariableSetIds": [],
+  "UsedPackages": [
+    "ansibleish"
+  ],
+  "DefaultToSkipIfAlreadyInstalled": false,
+  "TenantedDeploymentMode": "Untenanted",
+  "VersioningStrategy": {
+    "DonorPackageStepId": "786bcd34-77f4-4265-8d7a-ded27369738c",
+    "Template": null
+  },
+  "DefaultGuidedFailureMode": "EnvironmentDefault",
+  "Templates": [],
+  "ReleaseCreationStrategy": {
+    "ReleaseCreationPackageStepId": "",
+    "ChannelId": null
+  },
+  "ProjectConnectivityPolicy": {
+    "SkipMachineBehavior": "None",
+    "TargetRoles": [],
+    "AllowDeploymentsToNoTargets": false
+  },
+  "AutoDeployReleaseOverrides": []
+}

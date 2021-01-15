@@ -1,0 +1,34 @@
+{
+  "$type": "Octopus.Core.Model.Projects.Project, Octopus.Core",
+  "Id": "Projects-21",
+  "Name": "Offline",
+  "Description": "",
+  "Slug": "offline",
+  "IsDisabled": false,
+  "VariableSetId": "variableset-Projects-21",
+  "DeploymentProcessId": "deploymentprocess-Projects-21",
+  "ProjectGroupId": "ProjectGroups-1",
+  "LifecycleId": "Lifecycles-1",
+  "AutoCreateRelease": false,
+  "DiscreteChannelRelease": false,
+  "IncludedLibraryVariableSetIds": [],
+  "UsedPackages": [],
+  "DefaultToSkipIfAlreadyInstalled": false,
+  "TenantedDeploymentMode": "Untenanted",
+  "VersioningStrategy": {
+    "DonorPackageStepId": null,
+    "Template": "#{Octopus.Version.LastMajor}.#{Octopus.Version.LastMinor}.#{Octopus.Version.NextPatch}"
+  },
+  "DefaultGuidedFailureMode": "EnvironmentDefault",
+  "Templates": [],
+  "ReleaseCreationStrategy": {
+    "ReleaseCreationPackageStepId": null,
+    "ChannelId": null
+  },
+  "ProjectConnectivityPolicy": {
+    "SkipMachineBehavior": "None",
+    "TargetRoles": [],
+    "AllowDeploymentsToNoTargets": false
+  },
+  "AutoDeployReleaseOverrides": []
+}

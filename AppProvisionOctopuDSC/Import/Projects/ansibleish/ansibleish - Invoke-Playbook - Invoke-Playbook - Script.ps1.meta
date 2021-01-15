@@ -1,0 +1,8 @@
+{
+  "$type": "Octopus.Migrator.ExportProcess.ScriptMetadata, Octopus.Migrator",
+  "Id": "ansibleish",
+  "ProjectName": "ansibleish",
+  "StepName": "Invoke-Playbook",
+  "ActionName": "Invoke-Playbook",
+  "ScriptName": "Script.ps1"
+}

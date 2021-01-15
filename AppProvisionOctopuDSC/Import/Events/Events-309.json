@@ -1,0 +1,17 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-309",
+  "RelatedDocumentIds": [],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Exported",
+  "UserId": "User Manager",
+  "Username": "ContainerAdministrator",
+  "Occurred": "2018-01-16T17:42:55.7797399+00:00",
+  "Message": "Exported complete copy of configuration to c:\\import",
+  "MessageReferences": [],
+  "Comments": null,
+  "Details": null,
+  "IdentityEstablishedWith": "Command-line or tools"
+}

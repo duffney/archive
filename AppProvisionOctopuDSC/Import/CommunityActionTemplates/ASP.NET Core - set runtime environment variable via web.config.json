@@ -1,0 +1,56 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-7",
+  "Name": "ASP.NET Core - set runtime environment variable via web.config",
+  "ExternalId": "c7f96ab8-a0d3-4f01-928e-c8cb78ab108c",
+  "Description": "ASP.NET Core allows you specify environment variables in web.config - https://docs.microsoft.com/en-us/aspnet/core/hosting/aspnet-core-module#setting-environment-variables",
+  "Version": 1,
+  "ActionType": "Octopus.Script",
+  "Author": "teamtam",
+  "Website": "https://library.octopus.com/step-templates/c7f96ab8-a0d3-4f01-928e-c8cb78ab108c",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/aspnetcore-set-environment-variable.json",
+  "Category": ".NET Core",
+  "Properties": {
+    "Octopus.Action.Script.Syntax": "PowerShell",
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.RunOnServer": "false",
+    "Octopus.Action.Script.ScriptBody": "Param(\n    [string]$anc_WebConfigPath,\n    [string]$anc_EnvironmentVariableName,\n    [string]$anc_EnvironmentVariableValue\n)\n\n$ErrorActionPreference = \"Stop\"\n\nfunction Get-Parameter($Name, [switch]$Required, [switch]$TestPath) {\n\n    $result = $null\n\n    if ($OctopusParameters -ne $null) {\n        $result = $OctopusParameters[$Name]\n    }\n\n    if ($result -eq $null) {\n        $variable = Get-Variable $Name\n        if ($variable -ne $null) {\n            $result = $variable.Value\n        }\n    }\n\n    if ($result -eq $null -or $result -eq \"\") {\n        if ($Required) {\n            throw \"Missing parameter value $Name\"\n        }\n    }\n\n    if ($TestPath) {\n        if (!(Test-Path $result -PathType Leaf)) {\n            throw \"Could not find $result\"\n        }\n    }\n\n    return $result\n}\n\n& {\n    Param(\n        [string]$anc_WebConfigPath,\n        [string]$anc_EnvironmentVariableName,\n        [string]$anc_EnvironmentVariableValue\n    )\n\n    $xml = (Get-Content $anc_WebConfigPath) -as [Xml]\n    $environmentVariables = $xml.configuration.'system.webServer'.aspNetCore.environmentVariables\n    $environmentVariable = $environmentVariables.environmentVariable | Where-Object {$_.name -eq $anc_EnvironmentVariableName}\n\n    if ($environmentVariable) {\n        $environmentVariable.value = $anc_EnvironmentVariableValue\n    }\n    elseif ($environmentVariables) {\n        $environmentVariable = $xml.CreateElement(\"environmentVariable\");\n        $environmentVariable.SetAttribute(\"Name\", $anc_EnvironmentVariableName);\n        $environmentVariable.SetAttribute(\"Value\", $anc_EnvironmentVariableValue);\n        $x = $environmentVariables.AppendChild($environmentVariable)\n    }\n    else {\n        throw \"Could not find 'configuration/system.webServer/aspNetCore/environmentVariables' element in web.config\"\n    }\n\n    try {\n        $xml.Save((Resolve-Path $anc_WebConfigPath))\n    }\n    catch {\n        throw \"Could not save web.config because: $_.Exception.Message\"\n    }\n} `\n(Get-Parameter 'anc_WebConfigPath' -Required -TestPath) `\n(Get-Parameter 'anc_EnvironmentVariableName' -Required) `\n(Get-Parameter 'anc_EnvironmentVariableValue' -Required)\n",
+    "Octopus.Action.Script.ScriptFileName": "",
+    "Octopus.Action.Package.FeedId": "",
+    "Octopus.Action.Package.PackageId": ""
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "anc_WebConfigPath",
+      "Label": "Web.Config Path",
+      "HelpText": "Typically an output variable from a previous step",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "anc_EnvironmentVariableName",
+      "Label": "Environment Variable Name",
+      "HelpText": "Name of environment variable to set",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "anc_EnvironmentVariableValue",
+      "Label": "Environment Variable Value",
+      "HelpText": "Value of environment variable to set",
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-6-2018011412241419",
+  "LogoAttachmentMimeType": "image/png"
+}

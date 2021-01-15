@@ -1,0 +1,54 @@
+{
+  "$type": "Octopus.Core.Model.Projects.CommunityActionTemplate, Octopus.Core",
+  "Id": "CommunityActionTemplates-184",
+  "Name": "Remove Server From Azure Load Balancer",
+  "ExternalId": "5658d525-2a04-47da-85a0-00244976d811",
+  "Description": "Uses Service Principal to Remove Server From Azure Load Balancer.",
+  "Version": 1,
+  "ActionType": "Octopus.AzurePowerShell",
+  "Author": "tbrasch",
+  "Website": "https://library.octopus.com/step-templates/5658d525-2a04-47da-85a0-00244976d811",
+  "HistoryUrl": "https://github.com/OctopusDeploy/Library/commits/master/step-templates/remove-server-from-azure-load-balancer.json",
+  "Category": "Azure",
+  "Properties": {
+    "Octopus.Action.Script.ScriptSource": "Inline",
+    "Octopus.Action.Script.ScriptBody": "#region Verify variables\n\n#Verify psbilbAzureSubscription is not null.\nIf ([string]::IsNullOrEmpty($OctopusParameters['psbilbAzureSubscription']))\n{\n  Throw 'Azure Subscription cannot be null.'\n}\n$azureSubscription = $OctopusParameters['psbilbAzureSubscription']\nWrite-Host ('Azure Subscription: ' + $azureSubscription)\n\n#Verify psbilbAzureResourceGroup is not null.\nIf ([string]::IsNullOrEmpty($OctopusParameters['psbilbAzureResourceGroup']))\n{\n  Throw 'Azure Resource Group cannot be null.'\n}\n$azureResourceGroup = $OctopusParameters['psbilbAzureResourceGroup']\nWrite-Host ('Azure Resource Group: ' + $azureResourceGroup)\n\n\n#Verify psbilbAzureMachineName is not null.\nIf ([string]::IsNullOrEmpty($OctopusParameters['psbilbAzureMachineName']))\n{\n  Throw 'Azure Machine Name cannot be null.'\n}\n$azureMachineName = $OctopusParameters['psbilbAzureMachineName']\nWrite-Host ('Azure Machine Name: ' + $azureMachineName)\n\n#Verify psbilbAzureLoadBalancer is not null.\nIf ([string]::IsNullOrEmpty($OctopusParameters['psbilbAzureLoadBalancer']))\n{\n  Throw 'Azure Load Balancer cannot be null.'\n}\n$azureLoadBalancer = $OctopusParameters['psbilbAzureLoadBalancer']\nWrite-Host ('Azure Load Balancer: ' + $azureLoadBalancer)\n\n#endregion\n\n\n#region Process\n\nSet-AzureRmContext -SubscriptionName $azureSubscription\n\n$azureVM = Get-AzureRmVM -ResourceGroupName $azureResourceGroup -Name $azureMachineName\nIf (!$azureVM)\n{\n  Throw 'Could not retrieve server from Azure needed to remove from Load Balancer.'\n}\n\n$nic = (Get-AzureRmNetworkInterface -ResourceGroupName $azureResourceGroup | Where-Object {$_.VirtualMachine.Id -eq $azureVM.Id})\nIf (!$nic)\n{\n  Throw 'Could not retrieve NIC from Azure needed to remove from Load Balancer.'\n}\n\n$loadBalancer = Get-AzureRmLoadBalancer -Name $azureLoadBalancer -ResourceGroupName $azureResourceGroup\nIf (!$loadBalancer)\n{\n  Throw 'Could not retrieve Load Balancer info from Azure.'\n}\n\n$nic.IpConfigurations[0].LoadBalancerBackendAddressPools = $loadBalancer.BackendAddressPools\nSet-AzureRmNetworkInterface -NetworkInterface $nic\n\n#endregion\n",
+    "Octopus.Action.Package.FeedId": "",
+    "Octopus.Action.Script.ScriptFileName": "",
+    "Octopus.Action.Package.PackageId": ""
+  },
+  "Parameters": [
+    {
+      "Id": null,
+      "Name": "rsflbAzureSubscription",
+      "Label": "Azure Subscription",
+      "HelpText": null,
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "rsflbAzureResourceGroup",
+      "Label": "Azure Resource Group",
+      "HelpText": null,
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    },
+    {
+      "Id": null,
+      "Name": "rsflbAzureMachineName",
+      "Label": "Azure Machine Name",
+      "HelpText": null,
+      "DefaultValue": "",
+      "DisplaySettings": {
+        "Octopus.ControlType": "SingleLineText"
+      }
+    }
+  ],
+  "LogoAttachmentKey": "CommunityActionTemplates-175-2018011412241578",
+  "LogoAttachmentMimeType": "image/png"
+}

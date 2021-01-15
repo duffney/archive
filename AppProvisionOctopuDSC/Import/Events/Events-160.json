@@ -1,0 +1,25 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-160",
+  "RelatedDocumentIds": [
+    "ActionTemplates-1"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Modified",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-01-15T18:39:40.708936+00:00",
+  "Message": "ActionTemplate Invoke-DscAppConfig was modified",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "ActionTemplates-1",
+      "StartIndex": 15,
+      "Length": 19
+    }
+  ],
+  "Comments": null,
+  "Details": "<span>{\r&para;<br>  \"Id\": \"ActionTemplates-21\",\r&para;<br>  \"Name\": \"Invoke-DscAppConfig\",\r&para;<br>  \"Description\": \"Converts targeted json file to PSCustomObjects and invokes them with InvokeDSC module.\",\r&para;<br>  \"Version\": </span><del style=\"background:#ffe6e6;\">1</del><ins style=\"background:#e6ffe6;\">2</ins><span>,\r&para;<br>  \"ActionType\": \"Octopus.Script\",\r&para;<br>  \"CommunityActionTemplateId\": null,\r&para;<br>  \"Properties\": {\r&para;<br>    \"Octopus.Action.Script.ScriptSource\": \"Inline\",\r&para;<br>    \"Octopus.Action.Script.Syntax\": \"PowerShell\",\r&para;<br>    \"Octopus.Action.Script.ScriptBody\": \"</span><del style=\"background:#ffe6e6;\">Write-Host $Path\\n\\n</del><span>try\\n{\\n\\tImport-Module InvokeDSC -Force\\n}\\ncatch [System.IO.FileNotFoundException]\\n{\\n\\tthrow 'InvokeDSC module not found'\\n}\\n\\n$splat = @{\\n    Path = $Path\\n    Repository = $Repository\\n}\\n\\nInvoke-DscConfiguration @splat\"\r&para;<br>  },\r&para;<br>  \"Parameters\": [\r&para;<br>    {\r&para;<br>      \"Id\": \"12a60b8c-b213-4cfe-a972-3dc45cd9ec54\",\r&para;<br>      \"Name\": \"Path\",\r&para;<br>      \"Label\": \"\",\r&para;<br>      \"HelpText\": null,\r&para;<br>      \"DefaultValue\": \"\",\r&para;<br>      \"DisplaySettings\": {\r&para;<br>        \"Octopus.ControlType\": \"SingleLineText\"\r&para;<br>      }\r&para;<br>    },\r&para;<br>    {\r&para;<br>      \"Id\": \"d3f6fcf1-c179-4aed-bb93-44f2ab44abcc\",\r&para;<br>      \"Name\": \"Repository\",\r&para;<br>      \"Label\": \"\",\r&para;<br>      \"HelpText\": null,\r&para;<br>      \"DefaultValue\": \"\",\r&para;<br>      \"DisplaySettings\": {\r&para;<br>        \"Octopus.ControlType\": \"SingleLineText\"\r&para;<br>      }\r&para;<br>    }\r&para;<br>  ]\r&para;<br>}</span>",
+  "IdentityEstablishedWith": "Session cookie"
+}

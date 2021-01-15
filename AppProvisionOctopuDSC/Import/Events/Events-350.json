@@ -1,0 +1,25 @@
+{
+  "$type": "Octopus.Core.Model.Events.Event, Octopus.Core",
+  "Id": "Events-350",
+  "RelatedDocumentIds": [
+    "feeds-builtin"
+  ],
+  "ProjectId": null,
+  "EnvironmentId": null,
+  "TenantId": null,
+  "Category": "Created",
+  "UserId": "Users-1",
+  "Username": "admin",
+  "Occurred": "2018-04-05T18:18:43.698248+00:00",
+  "Message": "Package xWebAdministration version 1.19.0.0 was pushed to the builtin feed",
+  "MessageReferences": [
+    {
+      "ReferencedDocumentId": "feeds-builtin",
+      "StartIndex": 62,
+      "Length": 7
+    }
+  ],
+  "Comments": null,
+  "Details": null,
+  "IdentityEstablishedWith": "Session cookie"
+}
